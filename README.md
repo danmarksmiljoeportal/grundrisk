@@ -64,7 +64,7 @@ Next is to put at more wording on the flag enum - here do we use this:
 
 
 
-#2. Standard parameters in the response
+#3. Standard parameters in the response
 
 When you receive a response from the preliminary screenings for each compound there is also an section called standardParameters.
 
@@ -95,7 +95,7 @@ The values have this description:
 * Afstand til nærmeste boring uden ler i dæklag
 
 
-#3. Test input  for preliminary screening 
+#4. Test input  for preliminary screening 
 
 It produces produces 2 flags  - value 8 and 9 and standard parameters
 
