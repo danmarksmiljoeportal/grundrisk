@@ -1,0 +1,24 @@
+
+<div class="container">
+    <h2>Preliminary screening request</h2>
+    <div class="row">
+        <div class="col-12 mt-1">
+            <textarea class="form-control" rows="10" [(ngModel)]="bodyRequest">
+            </textarea>
+        </div>
+        <div class="col-12 text-right mt-2">
+            <button class="btn btn-primary" [disabled]="!bodyRequest || isSubmitting" (click)="submit()">
+                {{ (isSubmitting ? 'Submitting...' : 'Submit') }}
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <h2>Preliminary screening response: </h2>
+    <div class="border border-primary p-2" *ngIf="results">
+        {{ results | json }}
+    </div>
+    
+</div>
