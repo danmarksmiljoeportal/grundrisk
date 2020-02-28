@@ -1,5 +1,9 @@
+
+
 #Grundrisk API integration guide to Preliminary screening endpoint.
-[TOC]
+
+
+[[_TOC_]]
 # 1. Security
 
 In order to communicate with the endpoint `/screenings/preliminary` the code has to use the OAUTH codeflow against the endpoint. That means you have to contact DMP for registration on the DMP useradm for both test and production.
