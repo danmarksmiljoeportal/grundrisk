@@ -1,20 +1,112 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+##1. The value flag in the response from the API endpoint `/screenings/preliminary`
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+a. The value can be "flag":9 , which in bit is 1001.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+b. We need to describe that flags are a bit and it derived like this:
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+```
+    None = 0 << 0,
+    Bly_kobber_eller_PAH = 1 << 0,
+    Kompleks_geologi = 1 << 1,
+    Manglende_modelstof = 1 << 2,
+    Svag_geologi = 1 << 3,
+    MTBE_fjernet_i_Trin_2 = 1 << 4,
+    Boring_uden_ler = 1 << 5,
+    Risiko_pga_vandindvinding = 1 << 6,
+```
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+So we can tell that Bly_Kobber_eller_PAH is lit one as this is the first 1 in the 1001 and that the Svag_geologi is also lit as we have 1 in the end 1001. 
+
+For a better description of the short flagname we can use this translation:
+
+
+\- Bly_kobber_eller_PAH
+* Bly, kobber eller PAH fjernet i trin 1
+
+\- Kompleks_geologi
+* Område med kompleks geologi
+
+\- Manglende_modelstof
+* Et eller flere forureningsstoffer mangler et modelstof
+
+\- Svag_geologi
+* Svag datadækning for bestemmelse af dæklagstykkelser 
+
+\- MTBE_fjernet_i_Trin_2
+* MTBE fjernet i Trin 2 pga. beskyttende dæklag
+
+\- Boring_uden_ler
+* Lokalitet har boring uden ler i en radius af 100-300 m fra kant
+
+\- Risiko_pga_vandindvinding
+* Lokalitet udgør en risiko fordi der ligger en vandindvindingsboring indenfor 100 m
+
+
+##2. Standard parameters we use this translation
+
+\- Infiltration
+* Infiltration
+
+\- headGradient
+* Hydraulisk gradient
+
+\- aquiferDepth 
+* Dybde til grundvandsmagasin
+
+\- horizontalHydraulicConductivity
+* Hydraulisk konduktivitet
+
+\- porosity
+* Porøsitet
+
+\- firstOrderDegradationRate
+* Nedbrydningsrate
+
+\- distNearestWaterWell
+* Afstand til nærmeste indvinding
+
+\- distNoClay
+* Afstand til nærmeste boring uden ler i dæklag
+
+
+##3. Test input  for preliminary screening - which produces 2 flags  - value 8 and 9
+* Request
+```json
+{
+    "pollutantComponentCodes": [
+      "0703      ",
+      "0490      "
+    ],
+    "activities": [
+      {
+        "activityCode": "999       ",
+        "pollutionCauseCode": "50.20.10  "
+      },
+      {
+        "activityCode": "006       ",
+        "pollutionCauseCode": "50.50.00  "
+      },
+      {
+        "activityCode": "999       ",
+        "pollutionCauseCode": "25.12.00  "
+      }
+    ],
+    "v1ShapeWkts": [
+      "POLYGON ((554931.9389 6145817.3598, 554943.7005 6145814.4546, 554943.7377 6145814.4366, 554957.3742 6145803.8961, 554963.2915 6145805.0073, 554963.3599 6145804.9957, 554982.2349 6145794.1282, 554982.2398 6145794.1252, 554983.5714 6145793.2533, 554995.1822 6145842.5366, 554992.8408 6145844.0876, 554965.4258 6145862.191, 554960.6086 6145861.1682, 554948.7069 6145842.9933, 554957.3674 6145837.738, 554957.4005 6145837.5998, 554948.9235 6145823.9228, 554948.7887 6145823.8888, 554939.6435 6145829.1403, 554931.9389 6145817.3598))",
+      "POLYGON ((554944.9397 6145837.2277, 554939.7532 6145829.3079, 554948.8044 6145824.1104, 554957.1773 6145837.6194, 554948.5973 6145842.8258, 554944.9397 6145837.2278, 554944.9397 6145837.2277))"
+    ],
+    "v2ShapeWkts": null
+  }
+
+```
+
+* Response (part of the response)
+
+```json
+Response (part of the response)
+"polygonArea": 78.5398178100586,     "factor": 0,     "compoundName": "Bly",     "industryName": "Servicestationer",     "activityName": "Benzin og olie, salg af", "flag": 9,
+```
+
+```json
+"standardParameters": {       "infiltration": 100,       "aquiferDepth": 14.34807491,       "headGradient": 0.007,       "lithoCode": 1,       "distNearestWaterWell": 675.1535179323225,       "distNoClay": 669.5346970240031,       "porosity": 0,       "horizontalHydraulicConductivity": 0,       "firstOrderDegradationRate": 0     },
+```
