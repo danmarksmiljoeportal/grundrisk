@@ -54,13 +54,13 @@ Next is to put at more wording on the flag enum - here do we use this:
 - Manglende_modelstof
   - Et eller flere forureningsstoffer mangler et modelstof
 - Svag_geologi
-  -Svag datadækning for bestemmelse af dæklagstykkelser 
+  - Svag datadækning for bestemmelse af dæklagstykkelser 
 - MTBE_fjernet_i_Trin_2
   - MTBE fjernet i Trin 2 pga. beskyttende dæklag
 - Boring_uden_ler
   - Lokalitet har boring uden ler i en radius af 100-300 m fra kant
 - Risiko_pga_vandindvinding
- - Lokalitet udgør en risiko fordi der ligger en vandindvindingsboring indenfor 100 m
+  - Lokalitet udgør en risiko fordi der ligger en vandindvindingsboring indenfor 100 m
 
 
 
@@ -69,7 +69,7 @@ Next is to put at more wording on the flag enum - here do we use this:
 When you receive a response from the preliminary screenings for each compound there is also an section called standardParameters.
 
 The values have this description:
-```
+
 \- Infiltration
 * Infiltration
 
@@ -93,7 +93,7 @@ The values have this description:
 
 \- distNoClay
 * Afstand til nærmeste boring uden ler i dæklag
-```
+
 
 #3. Test input  for preliminary screening 
 
