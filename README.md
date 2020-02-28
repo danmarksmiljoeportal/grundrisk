@@ -46,7 +46,7 @@ In our example where the value is decimal 9 and 1001 as binary, can we now deriv
 
 Next is to put at more wording on the flag enum - here do we use this:
 
-
+```
 \- Bly_kobber_eller_PAH
 * Bly, kobber eller PAH fjernet i trin 1
 
@@ -67,7 +67,7 @@ Next is to put at more wording on the flag enum - here do we use this:
 
 \- Risiko_pga_vandindvinding
 * Lokalitet udgør en risiko fordi der ligger en vandindvindingsboring indenfor 100 m
-
+```
 
 
 #2. Standard parameters in the response
@@ -75,7 +75,7 @@ Next is to put at more wording on the flag enum - here do we use this:
 When you receive a response from the preliminary screenings for each compound there is also an section called standardParameters.
 
 The values have this description:
-
+```
 \- Infiltration
 * Infiltration
 
@@ -99,7 +99,7 @@ The values have this description:
 
 \- distNoClay
 * Afstand til nærmeste boring uden ler i dæklag
-
+```
 
 #3. Test input  for preliminary screening 
 
