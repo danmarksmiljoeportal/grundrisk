@@ -1,4 +1,12 @@
-##1. The value flag in the response from the API endpoint `/screenings/preliminary`
+#Grundrisk API integration guide to Preliminary screening endpoint.
+[TOC]
+# 1. Security
+
+In order to communicate with the endpoint `/screenings/preliminary` the code has to use the OAUTH codeflow against the endpoint. That means you have to contact DMP for registration on the DMP useradm for both test and production.
+
+You will need the role miljoe_grundrisk_foreloebigscreening in order to acces the endpoint.
+
+# The screeni flag in the response from the API endpoint `/screenings/preliminary`
 
 a. The value can be "flag":9 , which in bit is 1001.
 
