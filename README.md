@@ -40,7 +40,7 @@ When you receive a response from the preliminary screenings for each compound th
 ```
 
 In our example where the value is decimal 9 and 1001 as binary, can we now derive the following:
- 1. Bly_Kobber_eller_PAH is lit one as this is the first 1 in the 1001
+ 1. Bly_Kobber_eller_PAH is lit on as this is the first 1 in the 1001
  2. Svag_geologi is also lit as we have 1 in the end 1001. 
 
 
@@ -51,22 +51,17 @@ Next is to put at more wording on the flag enum - here do we use this:
   - Bly, kobber eller PAH fjernet i trin 1
 - Kompleks_geologi
   - Område med kompleks geologi
+- Manglende_modelstof
+  - Et eller flere forureningsstoffer mangler et modelstof
+- Svag_geologi
+  -Svag datadækning for bestemmelse af dæklagstykkelser 
+- MTBE_fjernet_i_Trin_2
+  - MTBE fjernet i Trin 2 pga. beskyttende dæklag
+- Boring_uden_ler
+  - Lokalitet har boring uden ler i en radius af 100-300 m fra kant
+- Risiko_pga_vandindvinding
+ - Lokalitet udgør en risiko fordi der ligger en vandindvindingsboring indenfor 100 m
 
-\- Manglende_modelstof
-* Et eller flere forureningsstoffer mangler et modelstof
-
-\- Svag_geologi
-* Svag datadækning for bestemmelse af dæklagstykkelser 
-
-\- MTBE_fjernet_i_Trin_2
-* MTBE fjernet i Trin 2 pga. beskyttende dæklag
-
-\- Boring_uden_ler
-* Lokalitet har boring uden ler i en radius af 100-300 m fra kant
-
-\- Risiko_pga_vandindvinding
-* Lokalitet udgør en risiko fordi der ligger en vandindvindingsboring indenfor 100 m
-```
 
 
 #2. Standard parameters in the response
