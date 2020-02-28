@@ -14,7 +14,7 @@ Virumgårdsvej 17A
 
 
 
-# 1. Security
+# 1. Security and access to the endpoint
 
 In order to communicate with the endpoint `/screenings/preliminary` the code has to use the OAUTH codeflow against the endpoint. That means you have to contact DMP for registration on the DMP useradm for both test and production.
 
@@ -24,9 +24,9 @@ You will need the role miljoe_grundrisk_foreloebigscreening in order to acces th
 
 When you receive a response from the preliminary screenings for each compound the following applies:
 
-a. The value can be "flag":9 , which is 1001 in the binary representation.
+1. The value can be "flag":9 , which is 1001 in the binary representation.
 
-b. The enums for calculating which flags that we can derive of the flag value, we use the bitwise left operation. The flag enums are like this:
+2. The enums for calculating which flags that we can derive of the flag value, we use the bitwise left operation. The flag enums are like this:
 
 ```
     None = 0 << 0,
@@ -46,12 +46,11 @@ In our example where the value is decimal 9 and 1001 as binary, can we now deriv
 
 Next is to put at more wording on the flag enum - here do we use this:
 
-```
-\- Bly_kobber_eller_PAH
-* Bly, kobber eller PAH fjernet i trin 1
 
-\- Kompleks_geologi
-* Område med kompleks geologi
+- Bly_kobber_eller_PAH
+  - Bly, kobber eller PAH fjernet i trin 1
+- Kompleks_geologi
+  - Område med kompleks geologi
 
 \- Manglende_modelstof
 * Et eller flere forureningsstoffer mangler et modelstof
