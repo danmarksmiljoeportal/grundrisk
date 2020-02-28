@@ -1,20 +1,32 @@
 
-
 #Grundrisk API integration guide to Preliminary screening endpoint.
 
+Dato: 28-02-2020
 
+Lavet af: Peter Prang Due, ppd@globeteam.com
+
+Globeteam A/S
+Virumgårdsvej 17A
+2830 Virum
+
+# Indholdsfortegnelse
 [[_TOC_]]
+
+
+
 # 1. Security
 
 In order to communicate with the endpoint `/screenings/preliminary` the code has to use the OAUTH codeflow against the endpoint. That means you have to contact DMP for registration on the DMP useradm for both test and production.
 
 You will need the role miljoe_grundrisk_foreloebigscreening in order to acces the endpoint.
 
-# The screeni flag in the response from the API endpoint `/screenings/preliminary`
+# 2. The screening flags in the response from the API endpoint `/screenings/preliminary`
 
-a. The value can be "flag":9 , which in bit is 1001.
+When you receive a response from the preliminary screenings for each compound the following applies:
 
-b. We need to describe that flags are a bit and it derived like this:
+a. The value can be "flag":9 , which is 1001 in the binary representation.
+
+b. The enums for calculating which flags that we can derive of the flag value, we use the bitwise left operation. The flag enums are like this:
 
 ```
     None = 0 << 0,
@@ -27,9 +39,12 @@ b. We need to describe that flags are a bit and it derived like this:
     Risiko_pga_vandindvinding = 1 << 6,
 ```
 
-So we can tell that Bly_Kobber_eller_PAH is lit one as this is the first 1 in the 1001 and that the Svag_geologi is also lit as we have 1 in the end 1001. 
+In our example where the value is decimal 9 and 1001 as binary, can we now derive the following:
+ 1. Bly_Kobber_eller_PAH is lit one as this is the first 1 in the 1001
+ 2. Svag_geologi is also lit as we have 1 in the end 1001. 
 
-For a better description of the short flagname we can use this translation:
+
+Next is to put at more wording on the flag enum - here do we use this:
 
 
 \- Bly_kobber_eller_PAH
@@ -54,7 +69,12 @@ For a better description of the short flagname we can use this translation:
 * Lokalitet udgør en risiko fordi der ligger en vandindvindingsboring indenfor 100 m
 
 
-##2. Standard parameters we use this translation
+
+#2. Standard parameters in the response
+
+When you receive a response from the preliminary screenings for each compound there is also an section called standardParameters.
+
+The values have this description:
 
 \- Infiltration
 * Infiltration
@@ -81,7 +101,10 @@ For a better description of the short flagname we can use this translation:
 * Afstand til nærmeste boring uden ler i dæklag
 
 
-##3. Test input  for preliminary screening - which produces 2 flags  - value 8 and 9
+#3. Test input  for preliminary screening 
+
+It produces produces 2 flags  - value 8 and 9 and standard parameters
+
 * Request
 ```json
 {
