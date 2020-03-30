@@ -1,14 +1,6 @@
 
 #Grundrisk API integration guide to Preliminary screening endpoint.
 
-Dato: 28-02-2020
-
-Lavet af: Peter Prang Due, ppd@globeteam.com
-
-Globeteam A/S
-Virumgårdsvej 17A
-2830 Virum
-
 # Indholdsfortegnelse
 [[_TOC_]]
 
@@ -18,7 +10,21 @@ Virumgårdsvej 17A
 
 In order to communicate with the endpoint `/screenings/preliminary` the code has to use the OAUTH codeflow against the endpoint. That means you have to contact DMP for registration on the DMP useradm for both test and production.
 
-You will need the role miljoe_grundrisk_foreloebigscreening in order to acces the endpoint.
+You will need the role miljoe_grundrisk_foreloebigscreening in order to acces the endpoint. 
+
+Please contact Danmarks Mlijøportal's support at support@miljoeportal.dk to get a client id and client secret for authorization.
+
+## Endpoint urls
+
+| Environment | Url |
+| ----------- | ---------------- |
+| TEST        | https://grundrisk-api.test.miljoeportal.dk/swagger/docs/v1      |
+| DEMO        | https://grundrisk-api.demo.miljoeportal.dk/swagger/docs/v1 |
+| PROD        | https://grundrisk-api.miljoeportal.dk/swagger/docs/v1|
+
+The production is not ready before June 1. 2020.
+
+
 
 # 2. The screening flags in the response from the API endpoint `/screenings/preliminary`
 
