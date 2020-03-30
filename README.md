@@ -1,7 +1,7 @@
 
 #Grundrisk API integration guide to Preliminary screening endpoint.
 
-# Indholdsfortegnelse
+# Table of content
 [[_TOC_]]
 
 
