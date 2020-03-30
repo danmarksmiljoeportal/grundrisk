@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-// Udv
-const ApiUrl = 'https://grundrisk-api.udv.miljoeportal.dk/';
-// Test
-// const ApiUrl = 'https://grundrisk-api.test.miljoeportal.dk/';
+// Demo
+const ApiUrl = 'https://grundrisk-api.demo.miljoeportal.dk/';
 
 @Component({
     selector: 'app-root',
