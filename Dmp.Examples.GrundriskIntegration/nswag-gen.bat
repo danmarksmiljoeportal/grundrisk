@@ -1,0 +1,1 @@
+C:\temp\NSwag\nswag swagger2csclient /input:https://grundrisk-api.demo.miljoeportal.dk/swagger/docs/v1/ /classname:GrundriskClient /namespace:Dmp.Examples.GrundriskIntegration /output:GrundriskClient.cs

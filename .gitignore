@@ -44,3 +44,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/Dmp.Examples.GrundriskIntegration/.vs/Dmp.Examples.GrundriskIntegration
+/Dmp.Examples.GrundriskIntegration/bin/Debug/netcoreapp2.2
+/Dmp.Examples.GrundriskIntegration/obj
