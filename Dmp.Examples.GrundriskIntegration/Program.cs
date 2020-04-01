@@ -35,8 +35,8 @@ namespace Dmp.Examples.GrundriskIntegration
 
             string authority = "https://log-in.test.miljoeportal.dk/runtime/oauth2";
             
-            string clientId = "** insert client id **";
-            string clientSecret = "** insert client secret **";
+            string clientId = "grundriskdemo-integration-jar";
+            string clientSecret = "KyLmrLAgAeiRr5KbJi8JkDWwatifa63xMRhGIqGgB4";
      
 
             string redirectUri = string.Format($"http://127.0.0.1:{port}");

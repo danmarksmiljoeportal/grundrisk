@@ -10,4 +10,10 @@
     <PackageReference Include="IdentityModel.OidcClient" Version="2.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="request.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
