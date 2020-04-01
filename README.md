@@ -1,8 +1,5 @@
 
-#Grundrisk API integration guide to Preliminary screening endpoint.
-
-# Table of content
-[[_TOC_]]
+Grundrisk API integration guide to Preliminary screening endpoint.
 
 
 
