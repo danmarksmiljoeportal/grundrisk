@@ -1,7 +1,10 @@
 
 Grundrisk API integration guide to Preliminary screening endpoint.
 
+# 1. The code
+The code consist of a SPA using Angular which shows how to fetch data and a .net core client.
 
+The .net core client is located in the folder - Dmp.Examples.GrundriskIntegration  which does a full codeflow login and then calls the grundrisk preliminary screening. Remember to look into "1. Security and access to the endpoint" as you would need the client id and secret.
 
 # 1. Security and access to the endpoint
 
@@ -21,7 +24,7 @@ Please contact Danmarks Mlijøportal's support at support@miljoeportal.dk to get
 
 The production is not ready before June 1. 2020.
 
-## Danmarks Miljøportal's Identity Provider
+# 2. Danmarks Miljøportal's Identity Provider
 Danmarks Miljøportal's identity provider supports OpenID Connect, a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end-user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end-user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
 
 OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end-users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.
@@ -39,7 +42,7 @@ The Authorization Code grant type is used by confidential and public clients to 
 
 After the user returns to the client via the redirect URL, the application will get the authorization code from the URL and use it to request an access token.
 
-# 2. The screening flags in the response from the API endpoint `/screenings/preliminary`
+# 3. The screening flags in the response from the API endpoint `/screenings/preliminary`
 
 When you receive a response from the preliminary screenings for each compound the following applies:
 
