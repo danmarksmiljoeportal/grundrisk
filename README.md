@@ -84,9 +84,37 @@ Next is to put at more wording on the flag enum - here do we use this:
 - Risiko_pga_vandindvinding
   - Lokalitet udgør en risiko fordi der ligger en vandindvindingsboring indenfor 100 m
 
+# 5 Removal reasons
+if the Removed parameter is set to true then there will a value in the removalreason. It will be an integer like for instance 213.
+
+To translate this into the removal reasons shown on the grundrisk web use this:
+
+	NotRemoved = 0, // default value
+        [Description('MTBE fjernet ifm. olie-miljø-pulje'],)]
+        Removed_0_1 = 01,
+        [Description(" 'MTBE fjernet, grundet aktiviteter vedr. værksted/olie']]
+        Removed_0_2 = 02,
+        [Description("'Fjernet grundet modelstof NVOC/COD/Ammonium/PAH/Bly/Kobber'])]
+        Removed_1_1 = 11,
+        [Description(Fjernet grundet stofgruppe PAH/Bly/Kobber']]
+        Removed_1_2 = 12,
+        [Description("'Forureningsfladen er 0')]
+        Removed_1_3 = 13,  
+        [Description("'Grundet dæklagets tykkelse forventes det ikke, at forureningsstoffet når grundvandet'],]
+        Removed_2_1 = 21,
+        [Description('Fjernet grundet bestemte stoffer']
+        Removed_2_2 = 22,
+        [Description ('GVK er større end koncentration efter vertikal transport']
+        Removed_2_3 = 23,
+        [Description('MTBE fjernet grundet dæklagstykkelsen]
+        Removed_2_4 = 24,
+        // Step 3
+        [Description('GVK er større end koncentration efter horisontalt transport)]
+        Removed_3_1 = 31
 
 
-#3. Standard parameters in the response
+
+# 6  Standard parameters in the response
 
 When you receive a response from the preliminary screenings for each compound there is also an section called standardParameters.
 
