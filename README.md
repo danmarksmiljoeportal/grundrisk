@@ -87,7 +87,7 @@ Next is to put at more wording on the flag enum - here do we use this:
 # 5 Removal reasons
 The removal reasons are set if the Removed parameter is set to true.
 
-At this case the removalreason will have an value like for instance 213.
+At this case the removalreason will have an value like for instance 13.
 
 To translate this into the removal reasons shown on the grundrisk web use this:
 
