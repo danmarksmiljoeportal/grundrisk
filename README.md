@@ -147,7 +147,7 @@ The values have this description:
 * Afstand til nærmeste boring uden ler i dæklag
 
 
-#4. Test input  for preliminary screening 
+# 7 Test input  for preliminary screening 
 
 It produces produces 2 flags  - value 8 and 9 and standard parameters
 
