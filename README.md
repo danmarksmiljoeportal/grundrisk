@@ -56,7 +56,7 @@ When you receive a response from the preliminary screenings for each compound th
     Kompleks_geologi = 1 << 1,
     Manglende_modelstof = 1 << 2,
     Svag_geologi = 1 << 3,
-    MTBE_fjernet_i_Trin_2 = 1 << 4,
+    MTBE_fjernet = 1 << 4,
     Boring_uden_ler = 1 << 5,
     Risiko_pga_vandindvinding = 1 << 6,
 ```
@@ -77,8 +77,8 @@ Next is to put at more wording on the flag enum - here do we use this:
   - Et eller flere forureningsstoffer mangler et modelstof
 - Svag_geologi
   - Svag datadækning for bestemmelse af dæklagstykkelser 
-- MTBE_fjernet_i_Trin_2
-  - MTBE fjernet i Trin 2 pga. beskyttende dæklag
+- MTBE_fjernet
+  - MTBE fjernet
 - Boring_uden_ler
   - Lokalitet har boring uden ler i en radius af 100-300 m fra kant
 - Risiko_pga_vandindvinding
