@@ -18,9 +18,9 @@ Please contact Danmarks Mlijøportal's support at support@miljoeportal.dk to get
 
 | Environment | Url |
 | ----------- | ---------------- |
-| TEST        | https://grundrisk-api.test.miljoeportal.dk/swagger/docs/v1      |
-| DEMO        | https://grundrisk-api.demo.miljoeportal.dk/swagger/docs/v1 |
-| PROD        | https://grundrisk-api.miljoeportal.dk/swagger/docs/v1|
+| TEST        | https://grundrisk-api.test.miljoeportal.dk/swagger/v1/swagger.json     |
+| DEMO        | https://grundrisk-api.demo.miljoeportal.dk/swagger/v1/swagger.json  |
+| PROD        | https://grundrisk-api.miljoeportal.dk/swagger/v1/swagger.json |
 
 The production is not ready before June 1. 2020.
 
