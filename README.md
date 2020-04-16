@@ -176,7 +176,10 @@ It produces produces 2 flags  - value 8 and 9 and standard parameters
       "POLYGON ((554931.9389 6145817.3598, 554943.7005 6145814.4546, 554943.7377 6145814.4366, 554957.3742 6145803.8961, 554963.2915 6145805.0073, 554963.3599 6145804.9957, 554982.2349 6145794.1282, 554982.2398 6145794.1252, 554983.5714 6145793.2533, 554995.1822 6145842.5366, 554992.8408 6145844.0876, 554965.4258 6145862.191, 554960.6086 6145861.1682, 554948.7069 6145842.9933, 554957.3674 6145837.738, 554957.4005 6145837.5998, 554948.9235 6145823.9228, 554948.7887 6145823.8888, 554939.6435 6145829.1403, 554931.9389 6145817.3598))",
       "POLYGON ((554944.9397 6145837.2277, 554939.7532 6145829.3079, 554948.8044 6145824.1104, 554957.1773 6145837.6194, 554948.5973 6145842.8258, 554944.9397 6145837.2278, 554944.9397 6145837.2277))"
     ],
-    "v2ShapeWkts": null
+    "v2ShapeWkts": [
+      "POLYGON ((554931.9389 6145817.3598, 554943.7005 6145814.4546, 554943.7377 6145814.4366, 554957.3742 6145803.8961, 554963.2915 6145805.0073, 554963.3599 6145804.9957, 554982.2349 6145794.1282, 554982.2398 6145794.1252, 554983.5714 6145793.2533, 554995.1822 6145842.5366, 554992.8408 6145844.0876, 554965.4258 6145862.191, 554960.6086 6145861.1682, 554948.7069 6145842.9933, 554957.3674 6145837.738, 554957.4005 6145837.5998, 554948.9235 6145823.9228, 554948.7887 6145823.8888, 554939.6435 6145829.1403, 554931.9389 6145817.3598))",
+      "POLYGON ((554944.9397 6145837.2277, 554939.7532 6145829.3079, 554948.8044 6145824.1104, 554957.1773 6145837.6194, 554948.5973 6145842.8258, 554944.9397 6145837.2278, 554944.9397 6145837.2277))"
+    ]
   }
 
 ```
@@ -191,3 +194,93 @@ Response (part of the response)
 ```json
 "standardParameters": {       "infiltration": 100,       "aquiferDepth": 14.34807491,       "headGradient": 0.007,       "lithoCode": 1,       "distNearestWaterWell": 675.1535179323225,       "distNoClay": 669.5346970240031,       "porosity": 0,       "horizontalHydraulicConductivity": 0,       "firstOrderDegradationRate": 0     },
 ```
+For each compound do you get this result: 
+```json
+ {
+      "preliminaryScreeningId": "24be7018-45d9-4f2c-8297-ab9f00e33dee",
+      "createdAt": "2020-04-16T13:47:42.9657869+00:00",
+      "status": 2,
+      "industry": {
+        "name": "Servicestationer",
+        "codeValue": "0490      "
+      },
+      "activity": {
+        "name": "V2 Branche",
+        "codeValue": "6"
+      },
+      "compoundName": "MTBE",
+      "compoundCasNr": null,
+      "qualityCriterion": 0,
+      "worstCaseConcentration": 50000,
+      "coverThickness": 17.457580133628177,
+      "dataQuality": 0,
+      "concentrationDownstream": 920.4096994781613,
+      "removed": false,
+      "removalReason": 0,
+      "logInfo": [
+        2,
+        6
+      ],
+      "concTopTables": 50000,
+      "conc100mGrundRisk": 920.4096994781613,
+      "factor": 920.4096994781613,
+      "flag": 8,
+      "polygonType": 0,
+      "polygonArea": 78.5398178100586,
+      "standardParameters": {
+        "infiltration": 100,
+        "aquiferDepth": 14.34807491,
+        "headGradient": 0.007,
+        "lithoCode": 1,
+        "distNearestWaterWell": 675.1535179323225,
+        "distNoClay": 669.5346970240031,
+        "porosity": 0.3,
+        "horizontalHydraulicConductivity": 0.0001,
+        "firstOrderDegradationRate": 0
+      },
+      "id": "16ae3c5e-51ad-4d5d-b504-ab9f00e356c9"
+    },
+    {
+      "preliminaryScreeningId": "24be7018-45d9-4f2c-8297-ab9f00e33dee",
+      "createdAt": "2020-04-16T13:47:42.9658422+00:00",
+      "status": 2,
+      "industry": {
+        "name": "Autoreparationsværksteder",
+        "codeValue": "3000      "
+      },
+      "activity": {
+        "name": "Andet",
+        "codeValue": "999"
+      },
+      "compoundName": "Dieselolie",
+      "compoundCasNr": "68334305",
+      "qualityCriterion": 9,
+      "worstCaseConcentration": 3000,
+      "coverThickness": 17.457580133628177,
+      "dataQuality": 0,
+      "concentrationDownstream": 55.22458196868968,
+      "removed": false,
+      "removalReason": 0,
+      "logInfo": [
+        2
+      ],
+      "concTopTables": 3000,
+      "conc100mGrundRisk": 55.22458196868968,
+      "factor": 6.136064663187742,
+      "flag": 8,
+      "polygonType": 0,
+      "polygonArea": 78.5398178100586,
+      "standardParameters": {
+        "infiltration": 100,
+        "aquiferDepth": 14.34807491,
+        "headGradient": 0.007,
+        "lithoCode": 1,
+        "distNearestWaterWell": 675.1535179323225,
+        "distNoClay": 669.5346970240031,
+        "porosity": 0.3,
+        "horizontalHydraulicConductivity": 0.0001,
+        "firstOrderDegradationRate": 0
+      },
+      "id": "b91b0980-adef-45ee-8b3e-ab9f00e356c9"
+    },
+    ```
