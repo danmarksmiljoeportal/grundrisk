@@ -16,13 +16,15 @@ Please contact Danmarks Mlijøportal's support at support@miljoeportal.dk to get
 
 ## Endpoint urls
 
-| Environment | Url |
-| ----------- | ---------------- |
-| TEST        | https://grundrisk-api.test.miljoeportal.dk/swagger/v1/swagger.json     |
-| DEMO        | https://grundrisk-api.demo.miljoeportal.dk/swagger/v1/swagger.json  |
-| PROD        | https://grundrisk-api.miljoeportal.dk/swagger/v1/swagger.json |
+| Environment | Url |Swagger | Swagger definintion|
+| ----------- | ---------------- |----|---|
+| TEST        |  https://grundrisk-api.test.miljoeportal.dk/preliminaryScreenings | https://grundrisk-api.test.miljoeportal.dk/swagger/ |https://grundrisk-api.test.miljoeportal.dk/swagger/v1/swagger.json |
+| DEMO        | https://grundrisk-api.demo.miljoeportal.dk/preliminaryScreenings | https://grundrisk-api.demo.miljoeportal.dk/swagger/ |https://grundrisk-api.demo.miljoeportal.dk/swagger/v1/swagger.json |
+| PROD        | https://grundrisk-api.miljoeportal.dk/preliminaryScreenings | https://grundrisk-api.miljoeportal.dk/swagger/ |https://grundrisk-api.miljoeportal.dk/swagger/v1/swagger.json |
 
-The production is not ready before June 1. 2020.
+
+
+The production is not ready before July 1. 2020.
 
 # 3. Danmarks Miljøportal's Identity Provider
 Danmarks Miljøportal's identity provider supports OpenID Connect, a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end-user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end-user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
@@ -42,7 +44,7 @@ The Authorization Code grant type is used by confidential and public clients to 
 
 After the user returns to the client via the redirect URL, the application will get the authorization code from the URL and use it to request an access token.
 
-# 4. The screening flags in the response from the API endpoint `/screenings/preliminary`
+# 4. The screening flags in the response from the API endpoint `/preliminaryScreenings`
 
 When you receive a response from the preliminary screenings for each compound the following applies:
 
@@ -196,25 +198,81 @@ Response (part of the response)
 ```
 For each compound do you get this result: 
 ```json
- {
-      "preliminaryScreeningId": "24be7018-45d9-4f2c-8297-ab9f00e33dee",
-      "createdAt": "2020-04-16T13:47:42.9657869+00:00",
+{
+  "id": "58b68cfa-b8b5-462c-84cd-abb100ac7077",
+  "createdAt": "2020-05-04T10:28:00.9028352+00:00",
+  "hasV1Polygon": true,
+  "hasV2Polygon": true,
+  "v1PolygonResult": {
+    "type": 0,
+    "hasData": true,
+    "factor": 920.4096994781613,
+    "polygonStatus": 1,
+    "reassessment": null,
+    "pollutant": "MTBE"
+  },
+  "v2PolygonResult": {
+    "type": 1,
+    "hasData": true,
+    "factor": 4850.969942641344,
+    "polygonStatus": 1,
+    "reassessment": null,
+    "pollutant": "MTBE"
+  },
+  "noModelCompounds": false,
+  "noScreeningInputs": false,
+  "screeningResults": [
+    {
+      "preliminaryScreeningId": "58b68cfa-b8b5-462c-84cd-abb100ac7077",
+      "createdAt": "2020-05-04T10:28:14.3428829+00:00",
       "status": 2,
-      "industry": {
-        "name": "Servicestationer",
-        "codeValue": "0490      "
+      "industry": null,
+      "activity": null,
+      "compoundName": "Benzin",
+      "compoundCasNr": null,
+      "qualityCriterion": 0,
+      "worstCaseConcentration": 8000,
+      "coverThickness": 17.457580133628177,
+      "dataQuality": 0,
+      "concentrationDownstream": 212.76435208837154,
+      "removed": false,
+      "removalReason": 0,
+      "logInfo": [
+        2,
+        6
+      ],
+      "concTopTables": 8000,
+      "conc100mGrundRisk": 212.76435208837154,
+      "factor": 212.76435208837154,
+      "flag": 8,
+      "polygonType": 1,
+      "polygonArea": 163.87679669065588,
+      "standardParameters": {
+        "infiltration": 100,
+        "aquiferDepth": 14.34807491,
+        "headGradient": 0.007,
+        "lithoCode": 1,
+        "distNearestWaterWell": 675.1535179323225,
+        "distNoClay": 669.5346970240031,
+        "porosity": 0.3,
+        "horizontalHydraulicConductivity": 0.0001,
+        "firstOrderDegradationRate": 0
       },
-      "activity": {
-        "name": "V2 Branche",
-        "codeValue": "6"
-      },
+      "id": "2fed46d8-e9ac-4ae1-97bc-abb100ac8d0e"
+    },
+    {
+      "preliminaryScreeningId": "58b68cfa-b8b5-462c-84cd-abb100ac7077",
+      "createdAt": "2020-05-04T10:28:14.342889+00:00",
+      "status": 2,
+      "industry": null,
+      "activity": null,
       "compoundName": "MTBE",
       "compoundCasNr": null,
       "qualityCriterion": 0,
       "worstCaseConcentration": 50000,
-      "coverThickness": 17.457580133628177,
+      "coverThickness": 17.46450808448605,
       "dataQuality": 0,
-      "concentrationDownstream": 920.4096994781613,
+      "concentrationDownstream": 4850.969942641344,
       "removed": false,
       "removalReason": 0,
       "logInfo": [
@@ -222,65 +280,22 @@ For each compound do you get this result:
         6
       ],
       "concTopTables": 50000,
-      "conc100mGrundRisk": 920.4096994781613,
-      "factor": 920.4096994781613,
+      "conc100mGrundRisk": 4850.969942641344,
+      "factor": 4850.969942641344,
       "flag": 8,
-      "polygonType": 0,
-      "polygonArea": 78.5398178100586,
+      "polygonType": 1,
+      "polygonArea": 2279.576082792796,
       "standardParameters": {
         "infiltration": 100,
         "aquiferDepth": 14.34807491,
         "headGradient": 0.007,
         "lithoCode": 1,
-        "distNearestWaterWell": 675.1535179323225,
-        "distNoClay": 669.5346970240031,
+        "distNearestWaterWell": 694.6089725890401,
+        "distNoClay": 668.5543884389465,
         "porosity": 0.3,
         "horizontalHydraulicConductivity": 0.0001,
         "firstOrderDegradationRate": 0
       },
-      "id": "16ae3c5e-51ad-4d5d-b504-ab9f00e356c9"
-    },
-    {
-      "preliminaryScreeningId": "24be7018-45d9-4f2c-8297-ab9f00e33dee",
-      "createdAt": "2020-04-16T13:47:42.9658422+00:00",
-      "status": 2,
-      "industry": {
-        "name": "Autoreparationsværksteder",
-        "codeValue": "3000      "
-      },
-      "activity": {
-        "name": "Andet",
-        "codeValue": "999"
-      },
-      "compoundName": "Dieselolie",
-      "compoundCasNr": "68334305",
-      "qualityCriterion": 9,
-      "worstCaseConcentration": 3000,
-      "coverThickness": 17.457580133628177,
-      "dataQuality": 0,
-      "concentrationDownstream": 55.22458196868968,
-      "removed": false,
-      "removalReason": 0,
-      "logInfo": [
-        2
-      ],
-      "concTopTables": 3000,
-      "conc100mGrundRisk": 55.22458196868968,
-      "factor": 6.136064663187742,
-      "flag": 8,
-      "polygonType": 0,
-      "polygonArea": 78.5398178100586,
-      "standardParameters": {
-        "infiltration": 100,
-        "aquiferDepth": 14.34807491,
-        "headGradient": 0.007,
-        "lithoCode": 1,
-        "distNearestWaterWell": 675.1535179323225,
-        "distNoClay": 669.5346970240031,
-        "porosity": 0.3,
-        "horizontalHydraulicConductivity": 0.0001,
-        "firstOrderDegradationRate": 0
-      },
-      "id": "b91b0980-adef-45ee-8b3e-ab9f00e356c9"
+      "id": "ad2b8503-7b97-4d15-81c7-abb100ac8d0e"
     },
  ```
