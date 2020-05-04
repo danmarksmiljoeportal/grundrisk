@@ -2,9 +2,15 @@
 Grundrisk API integration guide to Preliminary screening endpoint.
 
 # 1. The code
-The code consist of a SPA using Angular which shows how to fetch data and a .net core client.
+## .net core client with security
+Dmp.Examples.GrundriskIntegration is the The .net core client is located in the folder of the same name.
 
-The .net core client is located in the folder - Dmp.Examples.GrundriskIntegration  which does a full codeflow login and then calls the grundrisk preliminary screening. Remember to look into "1. Security and access to the endpoint" as you would need the client id and secret.
+It does a full codeflow login and then calls the grundrisk preliminary screening. Remember to look into "1. Security and access to the endpoint" as you would need the client id and secret.
+
+## Spa that show data
+The code consist of a SPA using Angular which shows how to fetch data and a .net core client and has no security included and is is intended to show how data can be displayed.
+
+
 
 # 2. Security and access to the endpoint
 
