@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-
 
 namespace Dmp.Examples.GrundriskIntegration
 {
@@ -14,13 +12,14 @@ namespace Dmp.Examples.GrundriskIntegration
             var preliminaryScreeningCommand = JsonConvert.DeserializeObject<StartPreliminaryScreeningCommand>(json);
 
             Console.WriteLine("Retrieving preliminaryscreening details");
-            var preliminaryScreeningResult = await grundriskClient.StartPreliminaryScreeningAsync(preliminaryScreeningCommand);
-
+            var result = await grundriskClient.StartPreliminaryScreeningAsync(preliminaryScreeningCommand);
             
-            foreach (var screening in preliminaryScreeningResult)
+            foreach (var screeningResult in result.ScreeningResults)
             {  
-
-                Console.WriteLine($"Retrieving prelimaryscreenings from {screening.CompoundName} with a concentration {screening.Conc100mGrundRisk} and a factor of {screening.Factor} and with flag value {screening.Flag}");
+                Console.WriteLine($"Retrieving prelimaryscreenings from {screeningResult.CompoundName} " +
+                    $"with a concentration {screeningResult.Conc100mGrundRisk} " +
+                    $"and a factor of {screeningResult.Factor} " +
+                    $"and with flag value {screeningResult.Flag}");
                
             }
         }
