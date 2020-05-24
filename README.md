@@ -7,6 +7,10 @@ Dmp.Examples.GrundriskIntegration is the The .net core client is located in the 
 
 It does a full codeflow login and then calls the grundrisk preliminary screening. Remember to look into "1. Security and access to the endpoint" as you would need the client id and secret.
 
+It is located in the folder DMP.examples.GrundriskIntegration and it is also found here:
+
+https://github.com/danmarksmiljoeportal/grundrisk/tree/master/Dmp.Examples.GrundriskIntegration
+
 ## Spa that show data
 The code consist of a SPA using Angular which shows how to fetch data and a .net core client and has no security included and is is intended to show how data can be displayed.
 
