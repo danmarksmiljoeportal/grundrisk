@@ -2,6 +2,31 @@
 Grundrisk API integration guide to Preliminary screening endpoint.
 
 # 1. The code
+## Generate C# API Client from swagger specs via NSwagStudio
+- Download NSwagStudio and document at here: https://github.com/RicoSuter/NSwag/wiki/NSwagStudio
+- After installing, using `GrundriskApiClient.nswag` file under `Dmp.Examples.GrundriskIntegration` folder and generate API Client
+- There is issue with `Required = Newtonsoft.Json.Required.DisallowNull` when generate the code (https://github.com/RicoSuter/NSwag/issues/1991 ). So, we need to add custom json settings for API Client
+```
+public partial class GrundriskClient
+{
+    partial void UpdateJsonSerializerSettings(JsonSerializerSettings settings)
+    {
+        settings.ContractResolver = new SafeContractResolver();
+    }
+}
+
+public class SafeContractResolver : DefaultContractResolver
+{
+    protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+    {
+        var jsonProp = base.CreateProperty(member, memberSerialization);
+        jsonProp.Required = Required.Default;
+        return jsonProp;
+    }
+}
+```
+- Refer the example `GrundriskClient.cs` and `GrundriskClient.Setting.cs` in code
+
 ## .net core client with security
 Dmp.Examples.GrundriskIntegration is the The .net core client is located in the folder of the same name.
 
