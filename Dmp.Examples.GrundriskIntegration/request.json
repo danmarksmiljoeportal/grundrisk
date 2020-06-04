@@ -1,20 +1,20 @@
 {
   "pollutantComponentCodes": [
-    "0703      ",
-    "0490      "
+    "0703",
+    "0490"
   ],
   "activities": [
     {
-      "activityCode": "999       ",
-      "pollutionCauseCode": "50.20.10  "
+      "activityCode": "999",
+      "pollutionCauseCode": "50.20.10"
     },
     {
-      "activityCode": "006       ",
-      "pollutionCauseCode": "50.50.00  "
+      "activityCode": "006",
+      "pollutionCauseCode": "50.50.00"
     },
     {
-      "activityCode": "999       ",
-      "pollutionCauseCode": "25.12.00  "
+      "activityCode": "999",
+      "pollutionCauseCode": "25.12.00"
     }
   ],
   "v1ShapeWkts": [

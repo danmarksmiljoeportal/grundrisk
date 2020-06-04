@@ -2,11 +2,21 @@
 Grundrisk API integration guide to Preliminary screening endpoint.
 
 # 1. The code
-## Generate C# API Client from swagger specs via NSwagStudio
+
+## .net core client with security
+Dmp.Examples.GrundriskIntegration is the The .net core client is located in the folder of the same name.
+
+It does a full codeflow login and then calls the grundrisk preliminary screening. Remember to look into "1. Security and access to the endpoint" as you would need the client id and secret.
+
+It is located in the folder DMP.examples.GrundriskIntegration and it is also found here:
+
+https://github.com/danmarksmiljoeportal/grundrisk/tree/master/Dmp.Examples.GrundriskIntegration
+
+## How to generate C# API Client from swagger via NSwagStudio
 - Download NSwagStudio and document at here: https://github.com/RicoSuter/NSwag/wiki/NSwagStudio
-- After installing, using `GrundriskApiClient.nswag` file under `Dmp.Examples.GrundriskIntegration` folder and generate API Client
+- After installing, using `GrundriskApiClient.nswag` file in `Dmp.Examples.GrundriskIntegration` folder and generate API Client
 - There is issue with `Required = Newtonsoft.Json.Required.DisallowNull` when generate the code (https://github.com/RicoSuter/NSwag/issues/1991 ). So, we need to add custom json settings for API Client
-```
+```csharp
 public partial class GrundriskClient
 {
     partial void UpdateJsonSerializerSettings(JsonSerializerSettings settings)
@@ -26,15 +36,6 @@ public class SafeContractResolver : DefaultContractResolver
 }
 ```
 - Refer the example `GrundriskClient.cs` and `GrundriskClient.Setting.cs` in code
-
-## .net core client with security
-Dmp.Examples.GrundriskIntegration is the The .net core client is located in the folder of the same name.
-
-It does a full codeflow login and then calls the grundrisk preliminary screening. Remember to look into "1. Security and access to the endpoint" as you would need the client id and secret.
-
-It is located in the folder DMP.examples.GrundriskIntegration and it is also found here:
-
-https://github.com/danmarksmiljoeportal/grundrisk/tree/master/Dmp.Examples.GrundriskIntegration
 
 ## Spa that show data
 The code consist of a SPA using Angular which shows how to fetch data and a .net core client and has no security included and is is intended to show how data can be displayed.
@@ -192,21 +193,21 @@ It produces produces 2 flags  - value 8 and 9 and standard parameters
 ```json
 {
     "pollutantComponentCodes": [
-      "0703      ",
-      "0490      "
+      "0703",
+      "0490"
     ],
     "activities": [
       {
-        "activityCode": "999       ",
-        "pollutionCauseCode": "50.20.10  "
+        "activityCode": "999",
+        "pollutionCauseCode": "50.20.10"
       },
       {
-        "activityCode": "006       ",
-        "pollutionCauseCode": "50.50.00  "
+        "activityCode": "006",
+        "pollutionCauseCode": "50.50.00"
       },
       {
-        "activityCode": "999       ",
-        "pollutionCauseCode": "25.12.00  "
+        "activityCode": "999",
+        "pollutionCauseCode": "25.12.00"
       }
     ],
     "v1ShapeWkts": [
