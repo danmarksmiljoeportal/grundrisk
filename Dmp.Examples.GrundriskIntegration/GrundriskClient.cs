@@ -2193,6 +2193,27 @@ namespace Dmp.Examples.GrundriskIntegration
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class CaseWorker
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Email { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cvr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cvr { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("region", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Region { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum ScreeningLocationType
     {
         _0 = 0,
@@ -2228,6 +2249,9 @@ namespace Dmp.Examples.GrundriskIntegration
 
         [Newtonsoft.Json.JsonProperty("region", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Region { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("caseWorker", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CaseWorker CaseWorker { get; set; }
 
         [Newtonsoft.Json.JsonProperty("visibleInScreening", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? VisibleInScreening { get; set; }
@@ -2299,9 +2323,6 @@ namespace Dmp.Examples.GrundriskIntegration
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Name { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
-
 
     }
 
@@ -2326,9 +2347,6 @@ namespace Dmp.Examples.GrundriskIntegration
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Comment { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
 
 
     }
@@ -2359,36 +2377,6 @@ namespace Dmp.Examples.GrundriskIntegration
 
         [Newtonsoft.Json.JsonProperty("v2ShapeWkts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<string> V2ShapeWkts { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("noModelCompounds", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? NoModelCompounds { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("noScreeningInputs", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? NoScreeningInputs { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CaseWorker
-    {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("cvr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cvr { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("region", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Region { get; set; }
 
 
     }
@@ -3038,9 +3026,6 @@ namespace Dmp.Examples.GrundriskIntegration
         [System.ComponentModel.DataAnnotations.Required]
         public CalculationInput CalculationInput { get; set; } = new CalculationInput();
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
-
 
     }
 
@@ -3051,9 +3036,6 @@ namespace Dmp.Examples.GrundriskIntegration
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Comment { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
-
 
     }
 
@@ -3063,9 +3045,6 @@ namespace Dmp.Examples.GrundriskIntegration
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Comment { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
 
 
     }
@@ -3078,9 +3057,6 @@ namespace Dmp.Examples.GrundriskIntegration
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Text { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
-
 
     }
 
@@ -3092,9 +3068,6 @@ namespace Dmp.Examples.GrundriskIntegration
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string ErrorMessage { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
-
 
     }
 
@@ -3104,9 +3077,6 @@ namespace Dmp.Examples.GrundriskIntegration
         [Newtonsoft.Json.JsonProperty("calculationResult", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public CalculationResult CalculationResult { get; set; } = new CalculationResult();
-
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
 
 
     }
