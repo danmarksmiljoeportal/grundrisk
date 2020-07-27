@@ -50,7 +50,7 @@ You will need the role miljoe_grundrisk_foreloebigscreening in order to acces th
 
 Please contact Danmarks Mlijøportal's support at support@miljoeportal.dk to get a client id and client secret for authorization.
 
-## Endpoint urls
+## API urls
 
 | Environment | Url |Swagger | Swagger definintion|
 | ----------- | ---------------- |----|---|
@@ -58,6 +58,13 @@ Please contact Danmarks Mlijøportal's support at support@miljoeportal.dk to get
 | DEMO        | https://grundrisk-api.demo.miljoeportal.dk/preliminaryScreenings | https://grundrisk-api.demo.miljoeportal.dk/swagger/ |https://grundrisk-api.demo.miljoeportal.dk/swagger/v1/swagger.json |
 | PROD        | https://grundrisk-api.miljoeportal.dk/preliminaryScreenings | https://grundrisk-api.miljoeportal.dk/swagger/ |https://grundrisk-api.miljoeportal.dk/swagger/v1/swagger.json |
 
+## Web urls
+
+| Environment | Url |
+| ----------- | ---------------- |
+| TEST        |  https://grundrisk.test.miljoeportal.dk/ |
+| DEMO        | https://grundrisk.demo.miljoeportal.dk/ |
+| PROD        | https://grundrisk.miljoeportal.dk/ |
 
 
 The production is not ready before July 1. 2020.
@@ -122,7 +129,43 @@ Next is to put at more wording on the flag enum - here do we use this:
 - Risiko_pga_vandindvinding
   - Lokalitet udgør en risiko fordi der ligger en vandindvindingsboring indenfor 100 m
 
-# 5 Removal reasons
+# 5. Standard parameters in the response
+
+When you receive a response from the preliminary screenings for each compound there is also an section called standardParameters.
+
+The values have this description:
+
+\- Infiltration
+* Infiltration
+
+\- headGradient
+* Hydraulisk gradient
+
+\- aquiferDepth 
+* Dybde til grundvandsmagasin
+
+\- horizontalHydraulicConductivity
+* Hydraulisk konduktivitet
+
+\- porosity
+* Porøsitet
+
+\- firstOrderDegradationRate
+* Nedbrydningsrate
+
+\- distNearestWaterWell
+* Afstand til nærmeste indvinding
+
+\- distNoClay
+* Afstand til nærmeste boring uden ler i dæklag
+
+# 6. The premilinary screening and riskassessment web links in the response
+
+The response will show the links:
+- `Preliminary screening link: https://grundrisk.demo.miljoeportal.dk/screening/preliminary/location-details/{response.LocationId}`
+- `Preliminary riskassessment link: https://grundrisk.demo.miljoeportal.dk/riskassessment/preliminary/location-details/{response.LocationId}`
+
+# 7. Removal reasons
 The removal reasons are set if the Removed parameter is set to true.
 
 At this case the removalreason will have an value like for instance 13.
@@ -153,72 +196,40 @@ To translate this into the removal reasons shown on the grundrisk web use this:
         Removed_3_1 = 31
 
 
-
-# 6  Standard parameters in the response
-
-When you receive a response from the preliminary screenings for each compound there is also an section called standardParameters.
-
-The values have this description:
-
-\- Infiltration
-* Infiltration
-
-\- headGradient
-* Hydraulisk gradient
-
-\- aquiferDepth 
-* Dybde til grundvandsmagasin
-
-\- horizontalHydraulicConductivity
-* Hydraulisk konduktivitet
-
-\- porosity
-* Porøsitet
-
-\- firstOrderDegradationRate
-* Nedbrydningsrate
-
-\- distNearestWaterWell
-* Afstand til nærmeste indvinding
-
-\- distNoClay
-* Afstand til nærmeste boring uden ler i dæklag
-
-
-# 7 Test input  for preliminary screening 
+# 8. Test input  for preliminary screening 
 
 It produces produces 2 flags  - value 8 and 9 and standard parameters
 
 * Request
 ```json
 {
-    "pollutantComponentCodes": [
-      "0703",
-      "0490"
-    ],
-    "activities": [
-      {
-        "activityCode": "999",
-        "pollutionCauseCode": "50.20.10"
-      },
-      {
-        "activityCode": "006",
-        "pollutionCauseCode": "50.50.00"
-      },
-      {
-        "activityCode": "999",
-        "pollutionCauseCode": "25.12.00"
-      }
-    ],
-    "v1ShapeWkts": [
-      "POLYGON ((554931.9389 6145817.3598, 554943.7005 6145814.4546, 554943.7377 6145814.4366, 554957.3742 6145803.8961, 554963.2915 6145805.0073, 554963.3599 6145804.9957, 554982.2349 6145794.1282, 554982.2398 6145794.1252, 554983.5714 6145793.2533, 554995.1822 6145842.5366, 554992.8408 6145844.0876, 554965.4258 6145862.191, 554960.6086 6145861.1682, 554948.7069 6145842.9933, 554957.3674 6145837.738, 554957.4005 6145837.5998, 554948.9235 6145823.9228, 554948.7887 6145823.8888, 554939.6435 6145829.1403, 554931.9389 6145817.3598))",
-      "POLYGON ((554944.9397 6145837.2277, 554939.7532 6145829.3079, 554948.8044 6145824.1104, 554957.1773 6145837.6194, 554948.5973 6145842.8258, 554944.9397 6145837.2278, 554944.9397 6145837.2277))"
-    ],
-    "v2ShapeWkts": [
-      "POLYGON ((554931.9389 6145817.3598, 554943.7005 6145814.4546, 554943.7377 6145814.4366, 554957.3742 6145803.8961, 554963.2915 6145805.0073, 554963.3599 6145804.9957, 554982.2349 6145794.1282, 554982.2398 6145794.1252, 554983.5714 6145793.2533, 554995.1822 6145842.5366, 554992.8408 6145844.0876, 554965.4258 6145862.191, 554960.6086 6145861.1682, 554948.7069 6145842.9933, 554957.3674 6145837.738, 554957.4005 6145837.5998, 554948.9235 6145823.9228, 554948.7887 6145823.8888, 554939.6435 6145829.1403, 554931.9389 6145817.3598))",
-      "POLYGON ((554944.9397 6145837.2277, 554939.7532 6145829.3079, 554948.8044 6145824.1104, 554957.1773 6145837.6194, 554948.5973 6145842.8258, 554944.9397 6145837.2278, 554944.9397 6145837.2277))"
-    ]
-  }
+  "locationNumber": "000-00003",
+  "pollutantComponentCodes": [
+    "0703",
+    "0490"
+  ],
+  "activities": [
+    {
+      "activityCode": "999",
+      "pollutionCauseCode": "50.20.10"
+    },
+    {
+      "activityCode": "006",
+      "pollutionCauseCode": "50.50.00"
+    },
+    {
+      "activityCode": "999",
+      "pollutionCauseCode": "25.12.00"
+    }
+  ],
+  "v1ShapeWkts": [
+    "POLYGON ((554931.9389 6145817.3598, 554943.7005 6145814.4546, 554943.7377 6145814.4366, 554957.3742 6145803.8961, 554963.2915 6145805.0073, 554963.3599 6145804.9957, 554982.2349 6145794.1282, 554982.2398 6145794.1252, 554983.5714 6145793.2533, 554995.1822 6145842.5366, 554992.8408 6145844.0876, 554965.4258 6145862.191, 554960.6086 6145861.1682, 554948.7069 6145842.9933, 554957.3674 6145837.738, 554957.4005 6145837.5998, 554948.9235 6145823.9228, 554948.7887 6145823.8888, 554939.6435 6145829.1403, 554931.9389 6145817.3598))",
+    "POLYGON ((554944.9397 6145837.2277, 554939.7532 6145829.3079, 554948.8044 6145824.1104, 554957.1773 6145837.6194, 554948.5973 6145842.8258, 554944.9397 6145837.2278, 554944.9397 6145837.2277))"
+  ],
+  "v2ShapeWkts": [
+    "POLYGON ((554944.9397 6145837.2277, 554939.7532 6145829.3079, 554948.8044 6145824.1104, 554957.1773 6145837.6194, 554948.5973 6145842.8258, 554944.9397 6145837.2278, 554944.9397 6145837.2277))"
+  ]
+}
 
 ```
 
