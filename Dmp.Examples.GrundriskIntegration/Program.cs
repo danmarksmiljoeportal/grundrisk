@@ -22,11 +22,12 @@ namespace Dmp.Examples.GrundriskIntegration
             httpClient.SetBearerToken(loginResult.AccessToken);
 
             string grundriskEndpoint = "https://grundrisk-api.demo.miljoeportal.dk";
+            var webUrl = "https://grundrisk.demo.miljoeportal.dk";
 
             Console.WriteLine("Initializing Grundrisk client");
             var grundriskClient = new GrundriskClient(grundriskEndpoint, httpClient);
 
-            await Preliminaryscreening.StartPreliminarySceening(grundriskClient);
+            await Preliminaryscreening.StartPreliminarySceening(grundriskClient, webUrl);
         }
 
         private static OidcClient InitializeLoginClient()
