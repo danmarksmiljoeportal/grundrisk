@@ -168,11 +168,13 @@ The response will show the links:
 # 7. Landfills
 The preliminary screening will now scan the input for the following activities or pollutioncause in order to determine if the input constitutes a landfill location.
 1. Activitites is located here: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/activities  
+
 and has currently the codes
 ```
 	['063', '065', '066', '067', '068', '069']
 ```
 2. Pollutioncauses is located here: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/pollutioncauses
+
 and has currently the codes
 ```
 	['90.02.00', '90.02.10', '90.02.20']
@@ -180,6 +182,7 @@ and has currently the codes
 3. If it does match one of the code it will constitute landfill it will get the following compounds added which then will be screened along with the other input.
 
 The compounds that are added are obtained from: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/pollutants 
+
 and has currently the values 
 
 | PollutantCode | PollutantName   | PollutantCompoundGroup      | Concentration | ModelCompoundCode | ModelCompoundName |
