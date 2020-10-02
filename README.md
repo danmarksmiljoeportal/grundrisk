@@ -178,8 +178,10 @@ and has currently the codes
 	['90.02.00', '90.02.10', '90.02.20']
 ```
 3. If it does match one of the code it will constitute landfill it will get the following compounds added which then will be screened along with the other input.
+
 The compounds that are added are obtained from: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/pollutants 
 and has currently the values 
+
 | PollutantCode | PollutantName   | PollutantCompoundGroup      | Concentration | ModelCompoundCode | ModelCompoundName |
 |---------------|-----------------|-----------------------------|---------------|-------------------|-------------------|
 | 380           | Carbon,org,NVOC | Perkolatparametre           | 73000         | 551               | Kem.iltf. COD     |
