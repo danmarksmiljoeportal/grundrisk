@@ -165,6 +165,40 @@ The response will show the links:
 - `Preliminary screening link: https://grundrisk.demo.miljoeportal.dk/screening/preliminary/location-details/{response.LocationId}`
 - `Preliminary riskassessment link: https://grundrisk.demo.miljoeportal.dk/riskassessment/preliminary/location-details/{response.LocationId}`
 
+# 7. Landfills
+1. The landfill activity codes: 
+```
+	['063', '065', '066', '067', '068', '069']
+```
+2. The landfill pollution cause codes: 
+```
+	['90.02.00', '90.02.10', '90.02.20']
+```
+3. Landfill pollutants
+
+| PollutantCode | PollutantName   | PollutantCompoundGroup      | Concentration | ModelCompoundCode | ModelCompoundName |
+|---------------|-----------------|-----------------------------|---------------|-------------------|-------------------|
+| 380           | Carbon,org,NVOC | Perkolatparametre           | 73000         | 551               | Kem.iltf. COD     |
+| 662           | Benzen          | Benzen                      | 8,5           | 662               | Benzen            |
+| 1014          | Ammonium-N      | Perkolatparametre           | 59000         | 551               | Kem.iltf.COD      |
+| 1511          | Arsen           | Metaller                    | 12,5          | 1511              | Arsen             |
+| 2041          | Jern            | Perkolatparametre           | 55000         | 551               | Kem.iltf.COD      |
+| 2618          | Trichlorethylen | Chlorerede opløsningsmiddel | 1,1           | 2618              | Trichlorethylen    |
+| 2676          | Phenol          | Phenoler                    | 3,2           | 2676              | Phenol            |
+| 3105          | Chlorbenzen     | Chlorbenzen                 | 50            | 3105              | Chlorbenzen       |
+| 4512          | Mechlorprop     | Pesticider-Phenoxysyrer     | 220           | 4512              | Mechlorprop       |
+| 4515          | Atrazin         | Atrazin                     | 3,4           | 4515              | Atrazin           |
+
+4. CompoundOrigin enum:
+
+```
+    Dkjord = 0,
+    JAR = 1,
+    Landfill = 2
+```
+
+* If IsLandfill of preliminary screening in the response is true, the list of preliminary screening contains 10 results that have CompoundOrigin is Landfill
+
 # 7. Removal reasons
 The removal reasons are set if the Removed parameter is set to true.
 

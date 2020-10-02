@@ -6,7 +6,7 @@
   ],
   "activities": [
     {
-      "activityCode": "999",
+      "activityCode": "063",
       "pollutionCauseCode": "50.20.10"
     },
     {
@@ -15,7 +15,7 @@
     },
     {
       "activityCode": "999",
-      "pollutionCauseCode": "25.12.00"
+      "pollutionCauseCode": "90.02.00"
     }
   ],
   "v1ShapeWkts": [
