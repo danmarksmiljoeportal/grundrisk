@@ -166,16 +166,20 @@ The response will show the links:
 - `Preliminary riskassessment link: https://grundrisk.demo.miljoeportal.dk/riskassessment/preliminary/location-details/{response.LocationId}`
 
 # 7. Landfills
-1. The landfill activity codes: 
+The preliminary screening will now scan the input for the following activities or pollutioncause in order to determine if the input constitutes a landfill location.
+1. Activitites is located here: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/activities  
+and has currently the codes
 ```
 	['063', '065', '066', '067', '068', '069']
 ```
-2. The landfill pollution cause codes: 
+2. Pollutioncauses is located here: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/pollutioncauses
+and has currently the codes
 ```
 	['90.02.00', '90.02.10', '90.02.20']
 ```
-3. Landfill pollutants
-
+3. If it does match one of the code it will constitute landfill it will get the following compounds added which then will be screened along with the other input.
+The compounds that are added are obtained from: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/pollutants 
+and has currently the values 
 | PollutantCode | PollutantName   | PollutantCompoundGroup      | Concentration | ModelCompoundCode | ModelCompoundName |
 |---------------|-----------------|-----------------------------|---------------|-------------------|-------------------|
 | 380           | Carbon,org,NVOC | Perkolatparametre           | 73000         | 551               | Kem.iltf. COD     |
@@ -199,7 +203,7 @@ The response will show the links:
 
 * If IsLandfill of preliminary screening in the response is true, the list of preliminary screening contains 10 results that have CompoundOrigin is Landfill
 
-# 7. Removal reasons
+# 8. Removal reasons
 The removal reasons are set if the Removed parameter is set to true.
 
 At this case the removalreason will have an value like for instance 13.
@@ -230,7 +234,7 @@ To translate this into the removal reasons shown on the grundrisk web use this:
         Removed_3_1 = 31
 
 
-# 8. Test input  for preliminary screening 
+# 9. Test input  for preliminary screening 
 
 It produces produces 2 flags  - value 8 and 9 and standard parameters
 
