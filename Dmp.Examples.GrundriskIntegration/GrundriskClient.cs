@@ -141,15 +141,106 @@ namespace Dmp.Examples.GrundriskIntegration
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<SearchViewOfLocationItem> SearchLocationItemsAsync(string caseWorkerName, string caseWorkerCvr, int? region, HighestRiskCalculationType? calculationType, RiskAssessmentStatus? riskAssessmentStatus, LocationSearchType? searchType, LocationSearchOrder? orderBy, bool? orderDescending, string searchText, int? take, string sortField, string sortDir, int? skip, string continuationToken, bool? isSortAsc)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ScreeningCompound>> GetScreeningCompoundsAsync()
         {
-            return SearchLocationItemsAsync(caseWorkerName, caseWorkerCvr, region, calculationType, riskAssessmentStatus, searchType, orderBy, orderDescending, searchText, take, sortField, sortDir, skip, continuationToken, isSortAsc, System.Threading.CancellationToken.None);
+            return GetScreeningCompoundsAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<SearchViewOfLocationItem> SearchLocationItemsAsync(string caseWorkerName, string caseWorkerCvr, int? region, HighestRiskCalculationType? calculationType, RiskAssessmentStatus? riskAssessmentStatus, LocationSearchType? searchType, LocationSearchOrder? orderBy, bool? orderDescending, string searchText, int? take, string sortField, string sortDir, int? skip, string continuationToken, bool? isSortAsc, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ScreeningCompound>> GetScreeningCompoundsAsync(System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/compounds/screening");
+
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<ScreeningCompound>>(response_, headers_).ConfigureAwait(false);
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == "401")
+                        {
+                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "403")
+                        {
+                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "404")
+                        {
+                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "500")
+                        {
+                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+
+                        return default(System.Collections.Generic.ICollection<ScreeningCompound>);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<SearchViewOfLocationItem> SearchLocationItemsAsync(string caseWorkerName, string caseWorkerCvr, int? region, double? minScreeningFactor, double? maxScreeningFactor, double? minFactor, double? maxFactor, string screeningContaminant, string contaminant, ScreeningPolygonStatus? polygonStatus, ScreeningLocationType? polygonType, HighestRiskCalculationType? calculationType, RiskAssessmentStatus? riskAssessmentStatus, LocationSearchType? searchType, LocationSearchOrder? orderBy, bool? orderDescending, string searchText, int? take, string sortField, string sortDir, int? skip, string continuationToken, bool? isSortAsc)
+        {
+            return SearchLocationItemsAsync(caseWorkerName, caseWorkerCvr, region, minScreeningFactor, maxScreeningFactor, minFactor, maxFactor, screeningContaminant, contaminant, polygonStatus, polygonType, calculationType, riskAssessmentStatus, searchType, orderBy, orderDescending, searchText, take, sortField, sortDir, skip, continuationToken, isSortAsc, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<SearchViewOfLocationItem> SearchLocationItemsAsync(string caseWorkerName, string caseWorkerCvr, int? region, double? minScreeningFactor, double? maxScreeningFactor, double? minFactor, double? maxFactor, string screeningContaminant, string contaminant, ScreeningPolygonStatus? polygonStatus, ScreeningLocationType? polygonType, HighestRiskCalculationType? calculationType, RiskAssessmentStatus? riskAssessmentStatus, LocationSearchType? searchType, LocationSearchOrder? orderBy, bool? orderDescending, string searchText, int? take, string sortField, string sortDir, int? skip, string continuationToken, bool? isSortAsc, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/locations?");
@@ -164,6 +255,38 @@ namespace Dmp.Examples.GrundriskIntegration
             if (region != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("Region") + "=").Append(System.Uri.EscapeDataString(ConvertToString(region, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (minScreeningFactor != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MinScreeningFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(minScreeningFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (maxScreeningFactor != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MaxScreeningFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(maxScreeningFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (minFactor != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MinFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(minFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (maxFactor != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MaxFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(maxFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (screeningContaminant != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ScreeningContaminant") + "=").Append(System.Uri.EscapeDataString(ConvertToString(screeningContaminant, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contaminant != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Contaminant") + "=").Append(System.Uri.EscapeDataString(ConvertToString(contaminant, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (polygonStatus != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PolygonStatus") + "=").Append(System.Uri.EscapeDataString(ConvertToString(polygonStatus, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (polygonType != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PolygonType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(polygonType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (calculationType != null)
             {
@@ -2416,6 +2539,64 @@ namespace Dmp.Examples.GrundriskIntegration
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ScreeningCompoundId
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ScreeningCompound
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("entityId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningCompoundId EntityId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("casNo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CasNo { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("stanCodeId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? StanCodeId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("standatId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? StandatId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("gvk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Gvk { get; set; }
+
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ScreeningPolygonStatus
+    {
+        _0 = 0,
+
+        _1 = 1,
+
+        _2 = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ScreeningLocationType
+    {
+        _0 = 0,
+
+        _1 = 1,
+
+        _2 = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum HighestRiskCalculationType
     {
         _0 = 0,
@@ -2493,28 +2674,6 @@ namespace Dmp.Examples.GrundriskIntegration
         [Newtonsoft.Json.JsonProperty("region", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Region { get; set; }
 
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ScreeningLocationType
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-        _2 = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ScreeningPolygonStatus
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-        _2 = 2,
 
     }
 
@@ -2897,6 +3056,17 @@ namespace Dmp.Examples.GrundriskIntegration
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum CompoundTranslationType
+    {
+        _0 = 0,
+
+        _1 = 1,
+
+        _2 = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class PreliminaryScreeningResult
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -2977,6 +3147,12 @@ namespace Dmp.Examples.GrundriskIntegration
         [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundOrigin? CompoundOrigin { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SourceSize { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundTranslationType? CompoundTranslationType { get; set; }
+
 
     }
 
@@ -3036,6 +3212,9 @@ namespace Dmp.Examples.GrundriskIntegration
 
         [Newtonsoft.Json.JsonProperty("pollutionStatusCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PollutionStatusCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("isLandfill", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? IsLandfill { get; set; }
 
 
     }
@@ -3099,6 +3278,15 @@ namespace Dmp.Examples.GrundriskIntegration
 
         [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningStandardParameters StandardParameters { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundOrigin? CompoundOrigin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SourceSize { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundTranslationType? CompoundTranslationType { get; set; }
 
 
     }
@@ -3213,6 +3401,12 @@ namespace Dmp.Examples.GrundriskIntegration
 
         [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundOrigin? CompoundOrigin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SourceSize { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundTranslationType? CompoundTranslationType { get; set; }
 
 
     }
@@ -3365,6 +3559,9 @@ namespace Dmp.Examples.GrundriskIntegration
 
         [Newtonsoft.Json.JsonProperty("horizontalVerticalDispersivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalVerticalDispersivity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("aerobicDegradation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? AerobicDegradation { get; set; }
 
         [Newtonsoft.Json.JsonProperty("hasAdditionalPoC", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasAdditionalPoC { get; set; }
@@ -3780,6 +3977,12 @@ namespace Dmp.Examples.GrundriskIntegration
         [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningFlag? Flag { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SourceSize { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundTranslationType? CompoundTranslationType { get; set; }
+
 
     }
 
@@ -3851,6 +4054,15 @@ namespace Dmp.Examples.GrundriskIntegration
 
         [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningStandardParameters StandardParameters { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundOrigin? CompoundOrigin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SourceSize { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundTranslationType? CompoundTranslationType { get; set; }
 
 
     }
@@ -3965,6 +4177,12 @@ namespace Dmp.Examples.GrundriskIntegration
 
         [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundOrigin? CompoundOrigin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SourceSize { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundTranslationType? CompoundTranslationType { get; set; }
 
 
     }

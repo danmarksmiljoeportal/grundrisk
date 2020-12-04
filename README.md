@@ -237,9 +237,24 @@ To translate this into the removal reasons shown on the grundrisk web use this:
         // Step 3
         [Description('GVK er større end koncentration efter horisontalt transport)]
         Removed_3_1 = 31
+		
+
+# 9. CompoundTranslationType enum:
+CompoundTranslationType is a enum with these values: Activity, PollutionCause, Pollutant
+```
+    Activity = 0,
+    PollutionCause = 1,
+    Pollutant = 2
+```
+
+If the result is V1 and from Activity, CompoundTranslationType is Activity
+
+If the result is V1 and from PollutionCause, CompoundTranslationType is PollutionCause
+
+If the result is V2, CompoundTranslationType is Pollutant
 
 
-# 9. Test input  for preliminary screening 
+# 10. Test input  for preliminary screening 
 
 It produces produces 2 flags  - value 8 and 9 and standard parameters
 
@@ -289,14 +304,14 @@ Response (part of the response)
 For each compound do you get this result: 
 ```json
 {
-  "id": "58b68cfa-b8b5-462c-84cd-abb100ac7077",
-  "createdAt": "2020-05-04T10:28:00.9028352+00:00",
+  "id": "b2d971a3-7e50-4cd2-8433-ac870031ab66",
+  "createdAt": "2020-12-04T03:00:58.5102264+00:00",
   "hasV1Polygon": true,
   "hasV2Polygon": true,
   "v1PolygonResult": {
     "type": 0,
     "hasData": true,
-    "factor": 920.4096994781613,
+    "factor": 303.41983658441023,
     "polygonStatus": 1,
     "reassessment": null,
     "pollutant": "MTBE"
@@ -304,88 +319,101 @@ For each compound do you get this result:
   "v2PolygonResult": {
     "type": 1,
     "hasData": true,
-    "factor": 4850.969942641344,
+    "factor": 438.2789431697559,
     "polygonStatus": 1,
     "reassessment": null,
     "pollutant": "MTBE"
   },
   "noModelCompounds": false,
   "noScreeningInputs": false,
-  "screeningResults": [
+  "isLandfill": false,
+  "preliminaryScreeningResults": [
     {
-      "preliminaryScreeningId": "58b68cfa-b8b5-462c-84cd-abb100ac7077",
-      "createdAt": "2020-05-04T10:28:14.3428829+00:00",
+      "locationId": "ec072d62-d5ad-4f07-ab24-ac870031ab79",
+      "preliminaryScreeningId": "b2d971a3-7e50-4cd2-8433-ac870031ab66",
+      "createdAt": "2020-12-04T03:01:02.2635272+00:00",
       "status": 2,
       "industry": null,
       "activity": null,
       "compoundName": "Benzin",
-      "compoundCasNr": null,
-      "qualityCriterion": 0,
+      "compoundCasNr": "",
+      "qualityCriterion": 9,
       "worstCaseConcentration": 8000,
-      "coverThickness": 17.457580133628177,
-      "dataQuality": 0,
-      "concentrationDownstream": 212.76435208837154,
+      "coverThickness": 14.05306862091965,
+      "dataQuality": 2,
+      "concentrationDownstream": 0.039270165749594695,
       "removed": false,
       "removalReason": 0,
       "logInfo": [
         2,
-        6
+        5
       ],
-      "concTopTables": 8000,
-      "conc100mGrundRisk": 212.76435208837154,
-      "factor": 212.76435208837154,
-      "flag": 8,
+      "concTopTables": 13.619023375377187,
+      "conc100mGrundRisk": 0.039270165749594695,
+      "factor": 0.004363351749954966,
+      "flag": 96,
       "polygonType": 1,
       "polygonArea": 163.87679669065588,
       "standardParameters": {
         "infiltration": 100,
         "aquiferDepth": 14.34807491,
-        "headGradient": 0.007,
+        "headGradient": 0.00402756,
         "lithoCode": 1,
-        "distNearestWaterWell": 675.1535179323225,
-        "distNoClay": 669.5346970240031,
+        "distNearestWaterWell": 99.99,
+        "distNoClay": 238.13659333991328,
         "porosity": 0.3,
         "horizontalHydraulicConductivity": 0.0001,
-        "firstOrderDegradationRate": 0
+        "firstOrderDegradationRate": 0.003
       },
-      "id": "2fed46d8-e9ac-4ae1-97bc-abb100ac8d0e"
+      "compoundOrigin": 1,
+      "sourceSize": 163.87679669065588,
+      "compoundTranslationType": 2,
+      "id": "0b2b54c6-aff0-459d-b527-ac870031b937"
     },
     {
-      "preliminaryScreeningId": "58b68cfa-b8b5-462c-84cd-abb100ac7077",
-      "createdAt": "2020-05-04T10:28:14.342889+00:00",
+      "locationId": "ec072d62-d5ad-4f07-ab24-ac870031ab79",
+      "preliminaryScreeningId": "b2d971a3-7e50-4cd2-8433-ac870031ab66",
+      "createdAt": "2020-12-04T03:01:02.2635287+00:00",
       "status": 2,
       "industry": null,
       "activity": null,
       "compoundName": "MTBE",
-      "compoundCasNr": null,
-      "qualityCriterion": 0,
+      "compoundCasNr": "1634044",
+      "qualityCriterion": 5,
       "worstCaseConcentration": 50000,
-      "coverThickness": 17.46450808448605,
-      "dataQuality": 0,
-      "concentrationDownstream": 4850.969942641344,
+      "coverThickness": 14.05306862091965,
+      "dataQuality": 2,
+      "concentrationDownstream": 2191.3947158487795,
       "removed": false,
       "removalReason": 0,
       "logInfo": [
-        2,
-        6
+        2
       ],
       "concTopTables": 50000,
-      "conc100mGrundRisk": 4850.969942641344,
-      "factor": 4850.969942641344,
-      "flag": 8,
+      "conc100mGrundRisk": 2191.3947158487795,
+      "factor": 438.2789431697559,
+      "flag": 96,
       "polygonType": 1,
-      "polygonArea": 2279.576082792796,
+      "polygonArea": 163.87679669065588,
       "standardParameters": {
         "infiltration": 100,
         "aquiferDepth": 14.34807491,
-        "headGradient": 0.007,
+        "headGradient": 0.00402756,
         "lithoCode": 1,
-        "distNearestWaterWell": 694.6089725890401,
-        "distNoClay": 668.5543884389465,
+        "distNearestWaterWell": 99.99,
+        "distNoClay": 238.13659333991328,
         "porosity": 0.3,
         "horizontalHydraulicConductivity": 0.0001,
         "firstOrderDegradationRate": 0
       },
-      "id": "ad2b8503-7b97-4d15-81c7-abb100ac8d0e"
+      "compoundOrigin": 1,
+      "sourceSize": 163.87679669065588,
+      "compoundTranslationType": 2,
+      "id": "bf2f3e6c-47b6-414b-9a90-ac870031b937"
     },
+	...
+  ],
+  "locationId": "ec072d62-d5ad-4f07-ab24-ac870031ab79",
+  "locationNumber": "000-00003"
+}
  ```
