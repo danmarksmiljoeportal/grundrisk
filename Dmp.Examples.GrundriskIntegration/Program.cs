@@ -39,7 +39,7 @@ namespace Dmp.Examples.GrundriskIntegration
             string clientId = "** insert client id **";
             string clientSecret = "** insert client secret **";
 
-            string redirectUri = string.Format($"http://127.0.0.1:{port}");
+            string redirectUri = string.Format($"https://127.0.0.1:{port}");
 
 
             var options = new OidcClientOptions
