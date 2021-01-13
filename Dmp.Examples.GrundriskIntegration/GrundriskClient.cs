@@ -13,48 +13,48 @@
 namespace Dmp.Examples.GrundriskIntegration
 {
     using System = global::System;
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.6.2.0 (NJsonSchema v10.1.23.0 (Newtonsoft.Json v12.0.0.0))")]
-    public partial class GrundriskClient
+    public partial class GrundriskClient 
     {
         private string _baseUrl = "";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-
+    
         public GrundriskClient(string baseUrl, System.Net.Http.HttpClient httpClient)
         {
-            BaseUrl = baseUrl;
-            _httpClient = httpClient;
+            BaseUrl = baseUrl; 
+            _httpClient = httpClient; 
             _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
         }
-
+    
         private Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
         {
             var settings = new Newtonsoft.Json.JsonSerializerSettings();
             UpdateJsonSerializerSettings(settings);
             return settings;
         }
-
-        public string BaseUrl
+    
+        public string BaseUrl 
         {
             get { return _baseUrl; }
             set { _baseUrl = value; }
         }
-
+    
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-
+    
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Compound>> GetCompoundsAsync()
         {
             return GetCompoundsAsync(System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -62,7 +62,7 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/compounds");
-
+    
             var client_ = _httpClient;
             try
             {
@@ -70,12 +70,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -85,46 +85,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<Compound>>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(System.Collections.Generic.ICollection<Compound>);
                     }
                     finally
@@ -138,14 +138,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<ScreeningCompound>> GetScreeningCompoundsAsync()
         {
             return GetScreeningCompoundsAsync(System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -153,7 +153,7 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/compounds/screening");
-
+    
             var client_ = _httpClient;
             try
             {
@@ -161,12 +161,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -176,46 +176,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<ScreeningCompound>>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(System.Collections.Generic.ICollection<ScreeningCompound>);
                     }
                     finally
@@ -229,115 +229,23 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<SearchViewOfLocationItem> SearchLocationItemsAsync(string caseWorkerName, string caseWorkerCvr, int? region, double? minScreeningFactor, double? maxScreeningFactor, double? minFactor, double? maxFactor, string screeningContaminant, string contaminant, ScreeningPolygonStatus? polygonStatus, ScreeningLocationType? polygonType, HighestRiskCalculationType? calculationType, RiskAssessmentStatus? riskAssessmentStatus, LocationSearchType? searchType, LocationSearchOrder? orderBy, bool? orderDescending, string searchText, int? take, string sortField, string sortDir, int? skip, string continuationToken, bool? isSortAsc)
+        public System.Threading.Tasks.Task<JarScreeningDetailsView> GetJarScreeningDetailsAsync(string locationNumber)
         {
-            return SearchLocationItemsAsync(caseWorkerName, caseWorkerCvr, region, minScreeningFactor, maxScreeningFactor, minFactor, maxFactor, screeningContaminant, contaminant, polygonStatus, polygonType, calculationType, riskAssessmentStatus, searchType, orderBy, orderDescending, searchText, take, sortField, sortDir, skip, continuationToken, isSortAsc, System.Threading.CancellationToken.None);
+            return GetJarScreeningDetailsAsync(locationNumber, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<SearchViewOfLocationItem> SearchLocationItemsAsync(string caseWorkerName, string caseWorkerCvr, int? region, double? minScreeningFactor, double? maxScreeningFactor, double? minFactor, double? maxFactor, string screeningContaminant, string contaminant, ScreeningPolygonStatus? polygonStatus, ScreeningLocationType? polygonType, HighestRiskCalculationType? calculationType, RiskAssessmentStatus? riskAssessmentStatus, LocationSearchType? searchType, LocationSearchOrder? orderBy, bool? orderDescending, string searchText, int? take, string sortField, string sortDir, int? skip, string continuationToken, bool? isSortAsc, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<JarScreeningDetailsView> GetJarScreeningDetailsAsync(string locationNumber, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/locations?");
-            if (caseWorkerName != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("CaseWorkerName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(caseWorkerName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (caseWorkerCvr != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("CaseWorkerCvr") + "=").Append(System.Uri.EscapeDataString(ConvertToString(caseWorkerCvr, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (region != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("Region") + "=").Append(System.Uri.EscapeDataString(ConvertToString(region, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (minScreeningFactor != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("MinScreeningFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(minScreeningFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (maxScreeningFactor != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("MaxScreeningFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(maxScreeningFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (minFactor != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("MinFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(minFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (maxFactor != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("MaxFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(maxFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (screeningContaminant != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("ScreeningContaminant") + "=").Append(System.Uri.EscapeDataString(ConvertToString(screeningContaminant, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (contaminant != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("Contaminant") + "=").Append(System.Uri.EscapeDataString(ConvertToString(contaminant, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (polygonStatus != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("PolygonStatus") + "=").Append(System.Uri.EscapeDataString(ConvertToString(polygonStatus, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (polygonType != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("PolygonType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(polygonType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (calculationType != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("CalculationType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(calculationType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (riskAssessmentStatus != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("RiskAssessmentStatus") + "=").Append(System.Uri.EscapeDataString(ConvertToString(riskAssessmentStatus, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (searchType != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("SearchType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (orderBy != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("OrderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderBy, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (orderDescending != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("OrderDescending") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderDescending, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (searchText != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("SearchText") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchText, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (take != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("Take") + "=").Append(System.Uri.EscapeDataString(ConvertToString(take, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (sortField != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("SortField") + "=").Append(System.Uri.EscapeDataString(ConvertToString(sortField, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (sortDir != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("SortDir") + "=").Append(System.Uri.EscapeDataString(ConvertToString(sortDir, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (skip != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("Skip") + "=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (continuationToken != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("ContinuationToken") + "=").Append(System.Uri.EscapeDataString(ConvertToString(continuationToken, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (isSortAsc != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("IsSortAsc") + "=").Append(System.Uri.EscapeDataString(ConvertToString(isSortAsc, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            urlBuilder_.Length--;
-
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/jar/locations/{locationNumber}/screenings");
+            urlBuilder_.Replace("{locationNumber}", System.Uri.EscapeDataString(ConvertToString(locationNumber, System.Globalization.CultureInfo.InvariantCulture)));
+    
             var client_ = _httpClient;
             try
             {
@@ -345,12 +253,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -360,46 +268,322 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<SearchViewOfLocationItem>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<JarScreeningDetailsView>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
+                        return default(JarScreeningDetailsView);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+    
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<JarRiskCalculationDetailsView> GetJarRiskCalculationDetailsAsync(string locationNumber)
+        {
+            return GetJarRiskCalculationDetailsAsync(locationNumber, System.Threading.CancellationToken.None);
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<JarRiskCalculationDetailsView> GetJarRiskCalculationDetailsAsync(string locationNumber, System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/jar/locations/{locationNumber}/riskCalculations");
+            urlBuilder_.Replace("{locationNumber}", System.Uri.EscapeDataString(ConvertToString(locationNumber, System.Globalization.CultureInfo.InvariantCulture)));
+    
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200") 
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<JarRiskCalculationDetailsView>(response_, headers_).ConfigureAwait(false);
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == "401") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "403") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "404") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "500") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+            
+                        return default(JarRiskCalculationDetailsView);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+    
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<SearchViewOfLocationItem> SearchLocationItemsAsync(string caseWorkerName, string caseWorkerCvr, int? region, double? minScreeningFactor, double? maxScreeningFactor, double? minFactor, double? maxFactor, string screeningContaminant, string contaminant, ScreeningPolygonStatus? polygonStatus, ScreeningLocationType? polygonType, HighestRiskCalculationType? calculationType, RiskAssessmentStatus? riskAssessmentStatus, LocationSearchType? searchType, LocationSearchOrder? orderBy, bool? orderDescending, string searchText, int? take, string sortField, string sortDir, int? skip, string continuationToken, bool? isSortAsc)
+        {
+            return SearchLocationItemsAsync(caseWorkerName, caseWorkerCvr, region, minScreeningFactor, maxScreeningFactor, minFactor, maxFactor, screeningContaminant, contaminant, polygonStatus, polygonType, calculationType, riskAssessmentStatus, searchType, orderBy, orderDescending, searchText, take, sortField, sortDir, skip, continuationToken, isSortAsc, System.Threading.CancellationToken.None);
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<SearchViewOfLocationItem> SearchLocationItemsAsync(string caseWorkerName, string caseWorkerCvr, int? region, double? minScreeningFactor, double? maxScreeningFactor, double? minFactor, double? maxFactor, string screeningContaminant, string contaminant, ScreeningPolygonStatus? polygonStatus, ScreeningLocationType? polygonType, HighestRiskCalculationType? calculationType, RiskAssessmentStatus? riskAssessmentStatus, LocationSearchType? searchType, LocationSearchOrder? orderBy, bool? orderDescending, string searchText, int? take, string sortField, string sortDir, int? skip, string continuationToken, bool? isSortAsc, System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/locations?");
+            if (caseWorkerName != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("CaseWorkerName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(caseWorkerName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (caseWorkerCvr != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("CaseWorkerCvr") + "=").Append(System.Uri.EscapeDataString(ConvertToString(caseWorkerCvr, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (region != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Region") + "=").Append(System.Uri.EscapeDataString(ConvertToString(region, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (minScreeningFactor != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MinScreeningFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(minScreeningFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (maxScreeningFactor != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MaxScreeningFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(maxScreeningFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (minFactor != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MinFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(minFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (maxFactor != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MaxFactor") + "=").Append(System.Uri.EscapeDataString(ConvertToString(maxFactor, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (screeningContaminant != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ScreeningContaminant") + "=").Append(System.Uri.EscapeDataString(ConvertToString(screeningContaminant, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contaminant != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Contaminant") + "=").Append(System.Uri.EscapeDataString(ConvertToString(contaminant, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (polygonStatus != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PolygonStatus") + "=").Append(System.Uri.EscapeDataString(ConvertToString(polygonStatus, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (polygonType != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PolygonType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(polygonType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (calculationType != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("CalculationType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(calculationType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (riskAssessmentStatus != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("RiskAssessmentStatus") + "=").Append(System.Uri.EscapeDataString(ConvertToString(riskAssessmentStatus, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (searchType != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("SearchType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderBy != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderBy") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderBy, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (orderDescending != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("OrderDescending") + "=").Append(System.Uri.EscapeDataString(ConvertToString(orderDescending, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (searchText != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("SearchText") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchText, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (take != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Take") + "=").Append(System.Uri.EscapeDataString(ConvertToString(take, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (sortField != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("SortField") + "=").Append(System.Uri.EscapeDataString(ConvertToString(sortField, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (sortDir != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("SortDir") + "=").Append(System.Uri.EscapeDataString(ConvertToString(sortDir, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (skip != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Skip") + "=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (continuationToken != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("ContinuationToken") + "=").Append(System.Uri.EscapeDataString(ConvertToString(continuationToken, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (isSortAsc != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("IsSortAsc") + "=").Append(System.Uri.EscapeDataString(ConvertToString(isSortAsc, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+    
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200") 
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<SearchViewOfLocationItem>(response_, headers_).ConfigureAwait(false);
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == "401") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "403") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "404") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "500") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+            
                         return default(SearchViewOfLocationItem);
                     }
                     finally
@@ -413,14 +597,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task LocationsAsync(System.Guid id)
         {
             return LocationsAsync(id, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -428,23 +612,23 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/locations/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -454,18 +638,18 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             return;
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                     }
@@ -480,14 +664,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task ExternalsAsync(CreateExternalLocationCommand body)
         {
             return ExternalsAsync(body, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -495,7 +679,7 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/locations/externals");
-
+    
             var client_ = _httpClient;
             try
             {
@@ -505,12 +689,12 @@ namespace Dmp.Examples.GrundriskIntegration
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -520,18 +704,18 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             return;
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                     }
@@ -546,14 +730,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task ReassessPolygonAsync(System.Guid id, ReassessPolygonCommand body)
         {
             return ReassessPolygonAsync(id, body, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -561,11 +745,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/locations/{id}/reassessPolygon");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -575,12 +759,12 @@ namespace Dmp.Examples.GrundriskIntegration
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -590,18 +774,18 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             return;
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                     }
@@ -616,14 +800,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<PreliminaryScreeningDetailView> StartPreliminaryScreeningAsync(StartPreliminaryScreeningCommand body)
         {
             return StartPreliminaryScreeningAsync(body, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -631,7 +815,7 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/preliminaryScreenings");
-
+    
             var client_ = _httpClient;
             try
             {
@@ -642,12 +826,12 @@ namespace Dmp.Examples.GrundriskIntegration
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -657,46 +841,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<PreliminaryScreeningDetailView>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(PreliminaryScreeningDetailView);
                     }
                     finally
@@ -710,14 +894,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<PreliminaryScreeningLocationDetailView> GetPreliminaryScreeningLocationDetailsAsync(System.Guid id)
         {
             return GetPreliminaryScreeningLocationDetailsAsync(id, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -725,11 +909,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/preliminaryScreenings/locations/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -737,12 +921,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -752,46 +936,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<PreliminaryScreeningLocationDetailView>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(PreliminaryScreeningLocationDetailView);
                     }
                     finally
@@ -805,14 +989,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<PreliminaryScreeningResultDetailView> GetPreliminaryScreeningResultDetailsAsync(System.Guid id)
         {
             return GetPreliminaryScreeningResultDetailsAsync(id, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -820,11 +1004,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/preliminaryScreenings/results/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -832,12 +1016,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -847,46 +1031,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<PreliminaryScreeningResultDetailView>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(PreliminaryScreeningResultDetailView);
                     }
                     finally
@@ -900,14 +1084,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<RiskCalculationDetailView> GetRiskCalculationDetailsAsync(System.Guid id)
         {
             return GetRiskCalculationDetailsAsync(id, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -915,11 +1099,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/riskCalculations/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -927,12 +1111,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -942,46 +1126,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<RiskCalculationDetailView>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(RiskCalculationDetailView);
                     }
                     finally
@@ -995,14 +1179,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task DeleteRiskCalculationAsync(System.Guid id)
         {
             return DeleteRiskCalculationAsync(id, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1010,23 +1194,23 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/riskCalculations/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1036,42 +1220,42 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             return;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                     }
@@ -1086,14 +1270,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<System.Guid> StartRiskCalculationAsync(StartRiskCalculationCommand body)
         {
             return StartRiskCalculationAsync(body, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1101,7 +1285,7 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/riskCalculations");
-
+    
             var client_ = _httpClient;
             try
             {
@@ -1112,12 +1296,12 @@ namespace Dmp.Examples.GrundriskIntegration
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1127,46 +1311,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(System.Guid);
                     }
                     finally
@@ -1180,14 +1364,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<System.Guid> ApproveRiskCalculationAsync(System.Guid id, ApproveRiskCalculationCommand body)
         {
             return ApproveRiskCalculationAsync(id, body, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1195,11 +1379,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/riskCalculations/{id}/approve");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -1210,12 +1394,12 @@ namespace Dmp.Examples.GrundriskIntegration
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1225,46 +1409,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(System.Guid);
                     }
                     finally
@@ -1278,14 +1462,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<System.Guid> UnapproveRiskCalculationAsync(System.Guid id, UnapproveRiskCalculationCommand body)
         {
             return UnapproveRiskCalculationAsync(id, body, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1293,11 +1477,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/riskCalculations/{id}/unapprove");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -1308,12 +1492,12 @@ namespace Dmp.Examples.GrundriskIntegration
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1323,46 +1507,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(System.Guid);
                     }
                     finally
@@ -1376,14 +1560,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<System.Guid> AddRiskCalculationCommentAsync(System.Guid id, AddRiskCalculationCommentCommand body)
         {
             return AddRiskCalculationCommentAsync(id, body, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1391,11 +1575,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/riskCalculations/{id}/comments");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -1406,12 +1590,12 @@ namespace Dmp.Examples.GrundriskIntegration
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1421,46 +1605,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(System.Guid);
                     }
                     finally
@@ -1474,14 +1658,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<System.Guid> SetCalculationFailureAsync(System.Guid id, SetRiskCalculationFailureCommand body)
         {
             return SetCalculationFailureAsync(id, body, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1489,11 +1673,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/riskCalculations/{id}/setFailure");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -1504,12 +1688,12 @@ namespace Dmp.Examples.GrundriskIntegration
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1519,46 +1703,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(System.Guid);
                     }
                     finally
@@ -1572,14 +1756,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<System.Guid> CompleteRiskCalculationAsync(System.Guid id, CompleteRiskCalculationCommand body)
         {
             return CompleteRiskCalculationAsync(id, body, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1587,11 +1771,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/riskCalculations/{id}/complete");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -1602,12 +1786,12 @@ namespace Dmp.Examples.GrundriskIntegration
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1617,46 +1801,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<System.Guid>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(System.Guid);
                     }
                     finally
@@ -1670,14 +1854,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<SearchViewOfScreeningItem> SearchScreeningItemsAsync(string locationNumber, System.DateTimeOffset? dateFrom, string searchText, int? take, string sortField, string sortDir, int? skip, string continuationToken, bool? isSortAsc)
         {
             return SearchScreeningItemsAsync(locationNumber, dateFrom, searchText, take, sortField, sortDir, skip, continuationToken, isSortAsc, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1685,44 +1869,44 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screenings?");
-            if (locationNumber != null)
+            if (locationNumber != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("LocationNumber") + "=").Append(System.Uri.EscapeDataString(ConvertToString(locationNumber, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (dateFrom != null)
+            if (dateFrom != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("DateFrom") + "=").Append(System.Uri.EscapeDataString(dateFrom.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (searchText != null)
+            if (searchText != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("SearchText") + "=").Append(System.Uri.EscapeDataString(ConvertToString(searchText, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (take != null)
+            if (take != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("Take") + "=").Append(System.Uri.EscapeDataString(ConvertToString(take, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (sortField != null)
+            if (sortField != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("SortField") + "=").Append(System.Uri.EscapeDataString(ConvertToString(sortField, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (sortDir != null)
+            if (sortDir != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("SortDir") + "=").Append(System.Uri.EscapeDataString(ConvertToString(sortDir, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (skip != null)
+            if (skip != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("Skip") + "=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (continuationToken != null)
+            if (continuationToken != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("ContinuationToken") + "=").Append(System.Uri.EscapeDataString(ConvertToString(continuationToken, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (isSortAsc != null)
+            if (isSortAsc != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("IsSortAsc") + "=").Append(System.Uri.EscapeDataString(ConvertToString(isSortAsc, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
-
+    
             var client_ = _httpClient;
             try
             {
@@ -1730,12 +1914,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1745,46 +1929,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<SearchViewOfScreeningItem>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(SearchViewOfScreeningItem);
                     }
                     finally
@@ -1798,14 +1982,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ScreeningDetailView> GetScreeningDetailsAsync(System.Guid id)
         {
             return GetScreeningDetailsAsync(id, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -1813,11 +1997,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screenings/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -1825,12 +2009,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1840,46 +2024,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<ScreeningDetailView>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(ScreeningDetailView);
                     }
                     finally
@@ -1893,35 +2077,35 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ListViewOfScreeningHistoryItem> GetScreeningHistoryItemsAsync(System.Guid? locationId, PolygonType? polygonType, double? polygonArea)
+        public System.Threading.Tasks.Task<ListViewOfScreeningResultHistoryItem> GetScreeningResultHistoryItemsAsync(System.Guid? locationId, PolygonType? polygonType, double? polygonArea)
         {
-            return GetScreeningHistoryItemsAsync(locationId, polygonType, polygonArea, System.Threading.CancellationToken.None);
+            return GetScreeningResultHistoryItemsAsync(locationId, polygonType, polygonArea, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ListViewOfScreeningHistoryItem> GetScreeningHistoryItemsAsync(System.Guid? locationId, PolygonType? polygonType, double? polygonArea, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ListViewOfScreeningResultHistoryItem> GetScreeningResultHistoryItemsAsync(System.Guid? locationId, PolygonType? polygonType, double? polygonArea, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screenings/histories?");
-            if (locationId != null)
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screenings/results/histories?");
+            if (locationId != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("LocationId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(locationId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (polygonType != null)
+            if (polygonType != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("PolygonType") + "=").Append(System.Uri.EscapeDataString(ConvertToString(polygonType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (polygonArea != null)
+            if (polygonArea != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("PolygonArea") + "=").Append(System.Uri.EscapeDataString(ConvertToString(polygonArea, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
-
+    
             var client_ = _httpClient;
             try
             {
@@ -1929,12 +2113,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1944,47 +2128,47 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ListViewOfScreeningHistoryItem>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<ListViewOfScreeningResultHistoryItem>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
-                        return default(ListViewOfScreeningHistoryItem);
+            
+                        return default(ListViewOfScreeningResultHistoryItem);
                     }
                     finally
                     {
@@ -1997,14 +2181,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ScreeningLocationDetailView> GetScreeningLocationDetailsAsync(System.Guid id)
         {
             return GetScreeningLocationDetailsAsync(id, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -2012,11 +2196,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screenings/locations/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -2024,12 +2208,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -2039,46 +2223,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<ScreeningLocationDetailView>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(ScreeningLocationDetailView);
                     }
                     finally
@@ -2092,14 +2276,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ScreeningResultDetailView> GetScreeningResultDetailsAsync(System.Guid id)
         {
             return GetScreeningResultDetailsAsync(id, System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -2107,11 +2291,11 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
-
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screenings/results/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
+    
             var client_ = _httpClient;
             try
             {
@@ -2119,12 +2303,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -2134,46 +2318,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<ScreeningResultDetailView>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(ScreeningResultDetailView);
                     }
                     finally
@@ -2187,14 +2371,110 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<ScreeningHistoryItem> GetScreeningHistoryItemsAsync(System.Guid? locationId)
+        {
+            return GetScreeningHistoryItemsAsync(locationId, System.Threading.CancellationToken.None);
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<ScreeningHistoryItem> GetScreeningHistoryItemsAsync(System.Guid? locationId, System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/screenings/histories?");
+            if (locationId != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("LocationId") + "=").Append(System.Uri.EscapeDataString(ConvertToString(locationId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+    
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200") 
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ScreeningHistoryItem>(response_, headers_).ConfigureAwait(false);
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == "401") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "403") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "404") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ == "500") 
+                        {
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+            
+                        return default(ScreeningHistoryItem);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<EmbeddedReportTokenModel> GetScreeningsAndRiskAssessmentsStatisticsAsync()
         {
             return GetScreeningsAndRiskAssessmentsStatisticsAsync(System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -2202,7 +2482,7 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/statistics/screeningsAndRiskAssessments");
-
+    
             var client_ = _httpClient;
             try
             {
@@ -2210,12 +2490,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -2225,46 +2505,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<EmbeddedReportTokenModel>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(EmbeddedReportTokenModel);
                     }
                     finally
@@ -2278,14 +2558,14 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<EmbeddedReportTokenModel> GetLocationScreeningsStatisticsAsync()
         {
             return GetLocationScreeningsStatisticsAsync(System.Threading.CancellationToken.None);
         }
-
+    
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -2293,7 +2573,7 @@ namespace Dmp.Examples.GrundriskIntegration
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/statistics/locationScreenings");
-
+    
             var client_ = _httpClient;
             try
             {
@@ -2301,12 +2581,12 @@ namespace Dmp.Examples.GrundriskIntegration
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
+    
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-
+    
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -2316,46 +2596,46 @@ namespace Dmp.Examples.GrundriskIntegration
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-
+    
                         ProcessResponse(client_, response_);
-
+    
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200")
+                        if (status_ == "200") 
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<EmbeddedReportTokenModel>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
-                        if (status_ == "401")
+                        if (status_ == "401") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Unauthorized", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "403")
+                        if (status_ == "403") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Forbidden", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "404")
+                        if (status_ == "404") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Not Found", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
-                        if (status_ == "500")
+                        if (status_ == "500") 
                         {
-                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Server Error", (int)response_.StatusCode, responseText_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-
+            
                         return default(EmbeddedReportTokenModel);
                     }
                     finally
@@ -2369,7 +2649,7 @@ namespace Dmp.Examples.GrundriskIntegration
             {
             }
         }
-
+    
         protected struct ObjectResponseResult<T>
         {
             public ObjectResponseResult(T responseObject, string responseText)
@@ -2377,21 +2657,21 @@ namespace Dmp.Examples.GrundriskIntegration
                 this.Object = responseObject;
                 this.Text = responseText;
             }
-
+    
             public T Object { get; }
-
+    
             public string Text { get; }
         }
-
+    
         public bool ReadResponseAsString { get; set; }
-
+        
         protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers)
         {
             if (response == null || response.Content == null)
             {
                 return new ObjectResponseResult<T>(default(T), string.Empty);
             }
-
+        
             if (ReadResponseAsString)
             {
                 var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -2426,7 +2706,7 @@ namespace Dmp.Examples.GrundriskIntegration
                 }
             }
         }
-
+    
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -2437,1778 +2717,2147 @@ namespace Dmp.Examples.GrundriskIntegration
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
                             return attribute.Value != null ? attribute.Value : name;
                         }
                     }
-
+        
                     return System.Convert.ToString(System.Convert.ChangeType(value, System.Enum.GetUnderlyingType(value.GetType()), cultureInfo));
                 }
             }
-            else if (value is bool)
+            else if (value is bool) 
             {
                 return System.Convert.ToString(value, cultureInfo)?.ToLowerInvariant();
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[])value);
+                return System.Convert.ToBase64String((byte[]) value);
             }
             else if (value != null && value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-
+        
             return System.Convert.ToString(value, cultureInfo);
         }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CompoundId
+    public partial class CompoundId 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Compound
+    public partial class Compound 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("entityId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundId EntityId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("casNo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CasNo { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("drinkingWaterQualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? DrinkingWaterQualityCriterion { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("groundWaterQualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? GroundWaterQualityCriterion { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("molecularWeight", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? MolecularWeight { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("henrysConstant", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HenrysConstant { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("freeDiffusionCoefficientInAir", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? FreeDiffusionCoefficientInAir { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("freeDiffusionCoefficientInWater", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? FreeDiffusionCoefficientInWater { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalFirstOrderDegradationRateAerobic", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalFirstOrderDegradationRateAerobic { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalFirstOrderDegradationRateAerobicMin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalFirstOrderDegradationRateAerobicMin { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalFirstOrderDegradationRateAerobicAverage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalFirstOrderDegradationRateAerobicAverage { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalFirstOrderDegradationRateAerobicMax", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalFirstOrderDegradationRateAerobicMax { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalFirstOrderDegradationRateAnaerobic", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalFirstOrderDegradationRateAnaerobic { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalFirstOrderDegradationRateAnaerobicMin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalFirstOrderDegradationRateAnaerobicMin { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalFirstOrderDegradationRateAnaerobicAverage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalFirstOrderDegradationRateAnaerobicAverage { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalFirstOrderDegradationRateAnaerobicMax", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalFirstOrderDegradationRateAnaerobicMax { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("verticalFirstOrderDegradationRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? VerticalFirstOrderDegradationRate { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningCompoundId
+    public partial class ScreeningCompoundId 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningCompound
+    public partial class ScreeningCompound 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("entityId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningCompoundId EntityId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("casNo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CasNo { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("stanCodeId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? StanCodeId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("standatId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? StandatId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("gvk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Gvk { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ScreeningPolygonStatus
+    public enum ScreeningFlag
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
         _2 = 2,
-
+    
+        _4 = 4,
+    
+        _8 = 8,
+    
+        _16 = 16,
+    
+        _32 = 32,
+    
+        _64 = 64,
+    
+        _128 = 128,
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ScreeningLocationType
+    public enum ScreeningStatus
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
         _2 = 2,
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum HighestRiskCalculationType
+    public partial class Industry 
+    {
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("codeValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CodeValue { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ActivityType
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
         _2 = 2,
-
+    
     }
-
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class Activity 
+    {
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("codeValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CodeValue { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("translatedCompound", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TranslatedCompound { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ActivityType? Type { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum DataQuality
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum RemovalReason
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _2 = 2,
+    
+        _11 = 11,
+    
+        _12 = 12,
+    
+        _13 = 13,
+    
+        _21 = 21,
+    
+        _22 = 22,
+    
+        _23 = 23,
+    
+        _24 = 24,
+    
+        _31 = 31,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum PolygonType
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ScreeningStandardParameters 
+    {
+        [Newtonsoft.Json.JsonProperty("infiltration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Infiltration { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("aquiferDepth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? AquiferDepth { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("headGradient", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? HeadGradient { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("lithoCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? LithoCode { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("distNearestWaterWell", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? DistNearestWaterWell { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("distNoClay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? DistNoClay { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("porosity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Porosity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("horizontalHydraulicConductivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? HorizontalHydraulicConductivity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("firstOrderDegradationRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? FirstOrderDegradationRate { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum CompoundOrigin
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum CompoundTranslationType
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class JarScreeningResultItem 
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CreatedAt { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningStatus? Status { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Industry Industry { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Activity Activity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundCasNr { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? QualityCriterion { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("worstCaseConcentration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? WorstCaseConcentration { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("coverThickness", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? CoverThickness { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("dataQuality", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public DataQuality? DataQuality { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("concentrationDownstream", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? ConcentrationDownstream { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Removed { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removalReason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public RemovalReason? RemovalReason { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Factor { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? Flag { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public PolygonType? PolygonType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("polygonArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? PolygonArea { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningStandardParameters StandardParameters { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundOrigin? CompoundOrigin { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SourceSize { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundTranslationType? CompoundTranslationType { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ScreeningCause
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ReasonToSaveScreening
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _10 = 10,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum OverrulingScreeningType
+    {
+        _0 = 0,
+    
+        _10 = 10,
+    
+        _20 = 20,
+    
+        _30 = 30,
+    
+        _40 = 40,
+    
+        _50 = 50,
+    
+        _60 = 60,
+    
+        _70 = 70,
+    
+        _80 = 80,
+    
+        _90 = 90,
+    
+        _100 = 100,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class PollutionCauseCompound 
+    {
+        [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Industry Industry { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ActivityCompound 
+    {
+        [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Activity Activity { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum MissingActivityType
+    {
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class MissingActivity 
+    {
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Code { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Description { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("translatedCompound", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TranslatedCompound { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public MissingActivityType? Type { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum MissingPollutionCauseType
+    {
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class MissingPollutionCause 
+    {
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Code { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Description { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("translatedCompound", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TranslatedCompound { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public MissingPollutionCauseType? Type { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class MissingPollutantComponent 
+    {
+        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Code { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Description { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("translatedCompound", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TranslatedCompound { get; set; }
+    
+    
+    }
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum RiskAssessmentStatus
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
     }
-
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ScreeningTriggeredBy
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ScreeningLog 
+    {
+        [Newtonsoft.Json.JsonProperty("screeningCause", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningCause? ScreeningCause { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("newScreeningAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? NewScreeningAt { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("previousScreeningAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? PreviousScreeningAt { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("reasonToSave", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ReasonToSaveScreening? ReasonToSave { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("overrulingScreeningRulesApplied", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<OverrulingScreeningType> OverrulingScreeningRulesApplied { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedFlags", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? AddedFlags { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedFlags", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? RemovedFlags { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedPollutants", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<string> AddedPollutants { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedPollutants", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<string> RemovedPollutants { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedPollutionCauses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<PollutionCauseCompound> AddedPollutionCauses { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedPollutionCauses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<PollutionCauseCompound> RemovedPollutionCauses { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedActivities", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ActivityCompound> AddedActivities { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedActivities", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ActivityCompound> RemovedActivities { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedMissingActivities", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<MissingActivity> AddedMissingActivities { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedMissingActivities", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<MissingActivity> RemovedMissingActivities { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedMissingPollutionCauses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<MissingPollutionCause> AddedMissingPollutionCauses { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedMissingPollutionCauses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<MissingPollutionCause> RemovedMissingPollutionCauses { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedMissingPollutantComponents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<MissingPollutantComponent> AddedMissingPollutantComponents { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedMissingPollutantComponents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<MissingPollutantComponent> RemovedMissingPollutantComponents { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedV1PolygonAreaInTotal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? AddedV1PolygonAreaInTotal { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedV1PolygonAreaInTotal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? RemovedV1PolygonAreaInTotal { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedV2PolygonAreaInTotal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? AddedV2PolygonAreaInTotal { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedV2PolygonAreaInTotal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? RemovedV2PolygonAreaInTotal { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("addedExceedFactor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? AddedExceedFactor { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removedExceedFactor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? RemovedExceedFactor { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("reassessedToStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public RiskAssessmentStatus? ReassessedToStatus { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("reassessmentComment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ReassessmentComment { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("screeningTriggeredBy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningTriggeredBy? ScreeningTriggeredBy { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class JarScreeningDetailsView 
+    {
+        [Newtonsoft.Json.JsonProperty("locationNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string LocationNumber { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("totalFlags", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? TotalFlags { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("v1ScreeningResults", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<JarScreeningResultItem> V1ScreeningResults { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("v2ScreeningResults", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<JarScreeningResultItem> V2ScreeningResults { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("screeningLog", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningLog ScreeningLog { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class JarLocationCalculationItem 
+    {
+        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CreatedAt { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundCasNr { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("exceedingFactor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? ExceedingFactor { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("calculationModelType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? CalculationModelType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("calculationFailed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? CalculationFailed { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("calculationFailedErrorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CalculationFailedErrorMessage { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class JarRiskCalculationDetailsView 
+    {
+        [Newtonsoft.Json.JsonProperty("locationNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string LocationNumber { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("locationStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string LocationStatus { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("approvedCalculations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<JarLocationCalculationItem> ApprovedCalculations { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("unapprovedCalculations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<JarLocationCalculationItem> UnapprovedCalculations { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ScreeningPolygonStatus
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ScreeningLocationType
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum HighestRiskCalculationType
+    {
+        _0 = 0,
+    
+        _1 = 1,
+    
+        _2 = 2,
+    
+    }
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum LocationSearchType
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
         _2 = 2,
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum LocationSearchOrder
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
         _2 = 2,
-
+    
         _3 = 3,
-
+    
         _4 = 4,
-
+    
         _5 = 5,
-
+    
         _6 = 6,
-
+    
         _7 = 7,
-
+    
         _8 = 8,
-
+    
         _9 = 9,
-
+    
         _10 = 10,
-
+    
         _11 = 11,
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CaseWorker
+    public partial class CaseWorker 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("cvr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Cvr { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("region", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Region { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class LocationItem
+    public partial class LocationItem 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("number", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Number { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("region", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Region { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("caseWorker", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CaseWorker CaseWorker { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("visibleInScreening", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? VisibleInScreening { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("screeningLocationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningLocationType? ScreeningLocationType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("polygonStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonStatus? PolygonStatus { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("screeningFactor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ScreeningFactor { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("screeningPollutant", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ScreeningPollutant { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("screeningConcentration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ScreeningConcentration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("screeningAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? ScreeningAt { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("visibleInRiskAssessment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? VisibleInRiskAssessment { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public HighestRiskCalculationType? CalculationType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("riskAssessmentStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RiskAssessmentStatus? RiskAssessmentStatus { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Factor { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("contaminant", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Contaminant { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("concentration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Concentration { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class SearchViewOfLocationItem
+    public partial class SearchViewOfLocationItem 
     {
         [Newtonsoft.Json.JsonProperty("items", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<LocationItem> Items { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public long? Total { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("continuationToken", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContinuationToken { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CreateExternalLocationCommand
+    public partial class CreateExternalLocationCommand 
     {
         [Newtonsoft.Json.JsonProperty("number", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string Number { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Name { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum PolygonType
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ReassessPolygonCommand
+    public partial class ReassessPolygonCommand 
     {
         [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonType? PolygonType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("reassessToStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RiskAssessmentStatus? ReassessToStatus { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Comment { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class BranchActivity
+    public partial class BranchActivity 
     {
         [Newtonsoft.Json.JsonProperty("activityCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActivityCode { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("pollutionCauseCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PollutionCauseCode { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class StartPreliminaryScreeningCommand
+    public partial class StartPreliminaryScreeningCommand 
     {
         [Newtonsoft.Json.JsonProperty("locationNumber", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(50)]
         public string LocationNumber { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("pollutantComponentCodes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<string> PollutantComponentCodes { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("activities", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<BranchActivity> Activities { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v1ShapeWkts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<string> V1ShapeWkts { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v2ShapeWkts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<string> V2ShapeWkts { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Reassessment
+    public partial class Reassessment 
     {
         [Newtonsoft.Json.JsonProperty("reassessedToStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RiskAssessmentStatus? ReassessedToStatus { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("reassementDate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? ReassementDate { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Comment { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("caseWorker", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CaseWorker CaseWorker { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningPolygonResult
+    public partial class ScreeningPolygonResult 
     {
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonType? Type { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasData", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasData { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Factor { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("polygonStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonStatus? PolygonStatus { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("reassessment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Reassessment Reassessment { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("pollutant", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Pollutant { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class PreliminaryScreeningResultId
+    public partial class PreliminaryScreeningResultId 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
-
+    
+    
     }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ScreeningStatus
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-        _2 = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Industry
-    {
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("codeValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CodeValue { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ActivityType
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-        _2 = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Activity
-    {
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("codeValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CodeValue { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("translatedCompound", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TranslatedCompound { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ActivityType? Type { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum DataQuality
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-        _2 = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum RemovalReason
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-        _2 = 2,
-
-        _11 = 11,
-
-        _12 = 12,
-
-        _13 = 13,
-
-        _21 = 21,
-
-        _22 = 22,
-
-        _23 = 23,
-
-        _24 = 24,
-
-        _31 = 31,
-
-    }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum ScreeningLogInfo
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
         _2 = 2,
-
+    
         _3 = 3,
-
+    
         _4 = 4,
-
+    
         _5 = 5,
-
+    
         _6 = 6,
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ScreeningFlag
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-        _2 = 2,
-
-        _4 = 4,
-
-        _8 = 8,
-
-        _16 = 16,
-
-        _32 = 32,
-
-        _64 = 64,
-
-        _128 = 128,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningStandardParameters
-    {
-        [Newtonsoft.Json.JsonProperty("infiltration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Infiltration { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("aquiferDepth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? AquiferDepth { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("headGradient", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? HeadGradient { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("lithoCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? LithoCode { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("distNearestWaterWell", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? DistNearestWaterWell { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("distNoClay", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? DistNoClay { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("porosity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Porosity { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("horizontalHydraulicConductivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? HorizontalHydraulicConductivity { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("firstOrderDegradationRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? FirstOrderDegradationRate { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum CompoundOrigin
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-        _2 = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum CompoundTranslationType
-    {
-        _0 = 0,
-
-        _1 = 1,
-
-        _2 = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class PreliminaryScreeningResult
+    public partial class PreliminaryScreeningResult 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("entityId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PreliminaryScreeningResultId EntityId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("locationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? LocationId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("preliminaryScreeningId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? PreliminaryScreeningId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? CreatedAt { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningStatus? Status { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Industry Industry { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Activity Activity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CompoundName { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CompoundCasNr { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? QualityCriterion { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("worstCaseConcentration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? WorstCaseConcentration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("coverThickness", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? CoverThickness { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("dataQuality", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DataQuality? DataQuality { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("concentrationDownstream", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ConcentrationDownstream { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("removed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Removed { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("removalReason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RemovalReason? RemovalReason { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("logInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ScreeningLogInfo> LogInfo { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("concTopTables", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ConcTopTables { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("conc100mGrundRisk", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Conc100mGrundRisk { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Factor { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningFlag? Flag { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonType? PolygonType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("polygonArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? PolygonArea { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningStandardParameters StandardParameters { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundOrigin? CompoundOrigin { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SourceSize { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundTranslationType? CompoundTranslationType { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class PreliminaryScreeningDetailView
+    public partial class PreliminaryScreeningDetailView 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? CreatedAt { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasV1Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasV1Polygon { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasV2Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasV2Polygon { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v1PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonResult V1PolygonResult { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v2PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonResult V2PolygonResult { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("noModelCompounds", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? NoModelCompounds { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("noScreeningInputs", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? NoScreeningInputs { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("isLandfill", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? IsLandfill { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("preliminaryScreeningResults", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<PreliminaryScreeningResult> PreliminaryScreeningResults { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("locationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? LocationId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("locationNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LocationNumber { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class LocationInfo
+    public partial class LocationInfo 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("number", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Number { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("pollutionStatusCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PollutionStatusCode { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("isLandfill", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? IsLandfill { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class PreliminaryScreeningLocationResultItem
+    public partial class PreliminaryScreeningLocationResultItem 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? CreatedAt { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningStatus? Status { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Industry Industry { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Activity Activity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CompoundName { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CompoundCasNr { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? QualityCriterion { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("worstCaseConcentration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? WorstCaseConcentration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("coverThickness", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? CoverThickness { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("dataQuality", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DataQuality? DataQuality { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("concentrationDownstream", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ConcentrationDownstream { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("removed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Removed { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("removalReason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RemovalReason? RemovalReason { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Factor { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningFlag? Flag { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonType? PolygonType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("polygonArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? PolygonArea { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningStandardParameters StandardParameters { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundOrigin? CompoundOrigin { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SourceSize { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundTranslationType? CompoundTranslationType { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class PreliminaryScreeningLocationDetailView
+    public partial class PreliminaryScreeningLocationDetailView 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? CreatedAt { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public LocationInfo Location { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v1PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonResult V1PolygonResult { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v2PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonResult V2PolygonResult { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasV1Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasV1Polygon { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasV2Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasV2Polygon { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v1PreliminaryScreenings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<PreliminaryScreeningLocationResultItem> V1PreliminaryScreenings { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v2PreliminaryScreenings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<PreliminaryScreeningLocationResultItem> V2PreliminaryScreenings { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class PreliminaryScreeningResultDetailView
+    public partial class PreliminaryScreeningResultDetailView 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("preliminaryScreeningId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? PreliminaryScreeningId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? CreatedAt { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningStatus? Status { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public LocationInfo Location { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Industry Industry { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Activity Activity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CompoundName { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CompoundCasNr { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? QualityCriterion { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("worstCaseConcentration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? WorstCaseConcentration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("coverThickness", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? CoverThickness { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("dataQuality", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DataQuality? DataQuality { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("concentrationDownstream", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ConcentrationDownstream { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("removed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Removed { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("removalReason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RemovalReason? RemovalReason { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("logInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ScreeningLogInfo> LogInfo { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("concTopTables", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ConcTopTables { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("conc100mGrundRisk", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Conc100mGrundRisk { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Factor { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningFlag? Flag { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonType? PolygonType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("polygonArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? PolygonArea { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningStandardParameters StandardParameters { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundOrigin? CompoundOrigin { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SourceSize { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundTranslationType? CompoundTranslationType { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum CalculationStatus
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
         _2 = 2,
-
+    
         _3 = 3,
-
+    
         _4 = 4,
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum CalculationType
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
         _2 = 2,
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CalculationInput
+    public partial class CalculationInput 
     {
         [Newtonsoft.Json.JsonProperty("contaminantCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContaminantCasNr { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("contaminantName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContaminantName { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("modelType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ModelType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("degradation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Degradation { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? CompoundCount { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("contaminantIndexInChain", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ContaminantIndexInChain { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("degradationChainCompoundNames", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<string> DegradationChainCompoundNames { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("degradationChainQualityCriteria", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> DegradationChainQualityCriteria { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("stoichiometricRatio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> StoichiometricRatio { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("henrysConstant", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> HenrysConstant { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("freeDiffusionCoefficientInAir", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> FreeDiffusionCoefficientInAir { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("freeDiffusionCoefficientInWater", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? FreeDiffusionCoefficientInWater { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sourceConcentration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> SourceConcentration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sourceLength", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SourceLength { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sourceWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SourceWidth { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sourceInfiltration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SourceInfiltration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("plumeInfiltration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? PlumeInfiltration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sourceRadius", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SourceRadius { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("concentrationZeroRadius", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ConcentrationZeroRadius { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sourceToAquiferDist", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SourceToAquiferDist { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("capillaryFringe", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? CapillaryFringe { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("verticalPorosity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? VerticalPorosity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("waterContent", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? WaterContent { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("verticalLongitudinalDispersivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? VerticalLongitudinalDispersivity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("verticalTransversalDispersivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? VerticalTransversalDispersivity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("verticalFirstOrderDegradationRate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> VerticalFirstOrderDegradationRate { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("fractureSpacing", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? FractureSpacing { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("fractureAperture", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? FractureAperture { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculateFractureAperture", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? CalculateFractureAperture { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("bulkHydraulicConductivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? BulkHydraulicConductivity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("aquiferThickness", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? AquiferThickness { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("groundwaterVelocity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? GroundwaterVelocity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculateGroundwaterVelocity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? CalculateGroundwaterVelocity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hydraulicConductivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HydraulicConductivity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hydraulicGradient", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HydraulicGradient { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalPorosity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalPorosity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalFirstOrderDegradationRate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> HorizontalFirstOrderDegradationRate { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalLongitudinalDispersivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalLongitudinalDispersivity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalTransversalDispersivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalTransversalDispersivity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalVerticalDispersivity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? HorizontalVerticalDispersivity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("aerobicDegradation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? AerobicDegradation { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasAdditionalPoC", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasAdditionalPoC { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("additionalPoCDistanceFromSource", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? AdditionalPoCDistanceFromSource { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("additionalPoCScreenLength", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? AdditionalPoCScreenLength { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("abstractionRate", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? AbstractionRate { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("pollutionSourceComment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PollutionSourceComment { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("verticalTransportComment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string VerticalTransportComment { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalTransportComment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string HorizontalTransportComment { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("pocComment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PocComment { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("userEmail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string UserEmail { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("sendMailOnComputationFinished", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? SendMailOnComputationFinished { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ResultPlotData
+    public partial class ResultPlotData 
     {
         [Newtonsoft.Json.JsonProperty("x", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> X { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("y", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> Y { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class PointResult
+    public partial class PointResult 
     {
         [Newtonsoft.Json.JsonProperty("concentration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> Concentration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("massDischarge", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> MassDischarge { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("excessFactor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> ExcessFactor { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("wellConcentration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<double> WellConcentration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("verticalModelOutput", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ResultPlotData> VerticalModelOutput { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("horizontalPlumeConcentration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ResultPlotData> HorizontalPlumeConcentration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("plumeConcentrationAtPoC", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ResultPlotData> PlumeConcentrationAtPoC { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("aquiferTopConcentration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ResultPlotData> AquiferTopConcentration { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CalculationResult
+    public partial class CalculationResult 
     {
         [Newtonsoft.Json.JsonProperty("pointResults", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<PointResult> PointResults { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum CommentCategory
     {
         _0 = 0,
-
+    
         _1 = 1,
-
+    
         _2 = 2,
-
+    
         _3 = 3,
-
+    
         _4 = 4,
-
+    
         _5 = 5,
-
+    
         _6 = 6,
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CalculationComment
+    public partial class CalculationComment 
     {
         [Newtonsoft.Json.JsonProperty("timeStamp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? TimeStamp { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("owner", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Owner { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("category", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CommentCategory? Category { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("text", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Text { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class RiskCalculationDetailView
+    public partial class RiskCalculationDetailView 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public LocationInfo Location { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? CreatedAt { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculationStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CalculationStatus? CalculationStatus { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CalculationType? CalculationType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculationInput", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CalculationInput CalculationInput { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculationResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CalculationResult CalculationResult { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculationFailed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? CalculationFailed { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculationFailedErrorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CalculationFailedErrorMessage { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("comments", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<CalculationComment> Comments { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class StartRiskCalculationCommand
+    public partial class StartRiskCalculationCommand 
     {
         [Newtonsoft.Json.JsonProperty("locationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? LocationId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CalculationType? CalculationType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("calculationInput", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public CalculationInput CalculationInput { get; set; } = new CalculationInput();
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ApproveRiskCalculationCommand
+    public partial class ApproveRiskCalculationCommand 
     {
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Comment { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class UnapproveRiskCalculationCommand
+    public partial class UnapproveRiskCalculationCommand 
     {
         [Newtonsoft.Json.JsonProperty("comment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Comment { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class AddRiskCalculationCommentCommand
+    public partial class AddRiskCalculationCommentCommand 
     {
         [Newtonsoft.Json.JsonProperty("text", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string Text { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class SetRiskCalculationFailureCommand
+    public partial class SetRiskCalculationFailureCommand 
     {
         [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [System.ComponentModel.DataAnnotations.StringLength(250)]
         public string ErrorMessage { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class CompleteRiskCalculationCommand
+    public partial class CompleteRiskCalculationCommand 
     {
         [Newtonsoft.Json.JsonProperty("calculationResult", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public CalculationResult CalculationResult { get; set; } = new CalculationResult();
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningItem
+    public partial class ScreeningItem 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? CreatedAt { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("locationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? LocationId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v1PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonResult V1PolygonResult { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v2PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonResult V2PolygonResult { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasV1Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasV1Polygon { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasV2Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasV2Polygon { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class SearchViewOfScreeningItem
+    public partial class SearchViewOfScreeningItem 
     {
         [Newtonsoft.Json.JsonProperty("items", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ScreeningItem> Items { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public long? Total { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("continuationToken", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContinuationToken { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum MissingActivityType
-    {
-        _1 = 1,
-
-        _2 = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class MissingActivity
-    {
-        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Code { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("translatedCompound", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TranslatedCompound { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MissingActivityType? Type { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum MissingPollutionCauseType
-    {
-        _1 = 1,
-
-        _2 = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class MissingPollutionCause
-    {
-        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Code { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("translatedCompound", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TranslatedCompound { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MissingPollutionCauseType? Type { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class MissingPollutantComponent
-    {
-        [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Code { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("description", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Description { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("translatedCompound", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string TranslatedCompound { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningDetailView
+    public partial class ScreeningDetailView 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? CreatedAt { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public LocationInfo Location { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v1PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonResult V1PolygonResult { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("v2PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ScreeningPolygonResult V2PolygonResult { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasV1Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasV1Polygon { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("hasV2Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? HasV2Polygon { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("missingActivities", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<MissingActivity> MissingActivities { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("missingPollutionCauses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<MissingPollutionCause> MissingPollutionCauses { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("missingPollutantComponents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<MissingPollutantComponent> MissingPollutantComponents { get; set; }
-
-
+    
+        [Newtonsoft.Json.JsonProperty("totalFlags", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? TotalFlags { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("screeningLog", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningLog ScreeningLog { get; set; }
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningHistoryItem
+    public partial class ScreeningResultHistoryItem 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("locationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? LocationId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CompoundName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CompoundCasNr { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("concentration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Concentration { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? QualityCriterion { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("excessFactor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? ExcessFactor { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public PolygonType? PolygonType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("polygonArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? PolygonArea { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Industry Industry { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Activity Activity { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ScreeningFlag? Flag { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? SourceSize { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CompoundTranslationType? CompoundTranslationType { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ListViewOfScreeningHistoryItem
-    {
-        [Newtonsoft.Json.JsonProperty("items", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ScreeningHistoryItem> Items { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningLocationResultItem
-    {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ScreeningStatus? Status { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Industry Industry { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Activity Activity { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CompoundName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CompoundCasNr { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? QualityCriterion { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("worstCaseConcentration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? WorstCaseConcentration { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("coverThickness", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? CoverThickness { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("dataQuality", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DataQuality? DataQuality { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("concentrationDownstream", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? ConcentrationDownstream { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("removed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Removed { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("removalReason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public RemovalReason? RemovalReason { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Factor { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ScreeningFlag? Flag { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public PolygonType? PolygonType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("polygonArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? PolygonArea { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ScreeningStandardParameters StandardParameters { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CompoundOrigin? CompoundOrigin { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? SourceSize { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CompoundTranslationType? CompoundTranslationType { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningLocationDetailView
-    {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTimeOffset? CreatedAt { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public LocationInfo Location { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("v1PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ScreeningPolygonResult V1PolygonResult { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("v2PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ScreeningPolygonResult V2PolygonResult { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("hasV1Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? HasV1Polygon { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("hasV2Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? HasV2Polygon { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("v1Screenings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ScreeningLocationResultItem> V1Screenings { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("v2Screenings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ScreeningLocationResultItem> V2Screenings { get; set; }
-
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class ScreeningResultDetailView
-    {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("screeningId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ScreeningId { get; set; }
-
+    
+        [Newtonsoft.Json.JsonProperty("locationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? LocationId { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? CreatedAt { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ScreeningStatus? Status { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public LocationInfo Location { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Industry Industry { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Activity Activity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CompoundName { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CompoundCasNr { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+    
+        [Newtonsoft.Json.JsonProperty("concentration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Concentration { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? QualityCriterion { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("worstCaseConcentration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? WorstCaseConcentration { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("coverThickness", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? CoverThickness { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("dataQuality", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public DataQuality? DataQuality { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("concentrationDownstream", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? ConcentrationDownstream { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("removed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Removed { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("removalReason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public RemovalReason? RemovalReason { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("logInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<ScreeningLogInfo> LogInfo { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("concTopTables", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? ConcTopTables { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("conc100mGrundRisk", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Conc100mGrundRisk { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Factor { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ScreeningFlag? Flag { get; set; }
-
+    
+        [Newtonsoft.Json.JsonProperty("excessFactor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? ExcessFactor { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonType? PolygonType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("polygonArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? PolygonArea { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ScreeningStandardParameters StandardParameters { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CompoundOrigin? CompoundOrigin { get; set; }
-
+    
+        [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Industry Industry { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Activity Activity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? Flag { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? SourceSize { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CompoundTranslationType? CompoundTranslationType { get; set; }
-
-
+    
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class EmbeddedReportTokenModel
+    public partial class ListViewOfScreeningResultHistoryItem 
+    {
+        [Newtonsoft.Json.JsonProperty("items", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ScreeningResultHistoryItem> Items { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ScreeningLocationResultItem 
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Id { get; set; }
-
+    
+        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CreatedAt { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningStatus? Status { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Industry Industry { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Activity Activity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundCasNr { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? QualityCriterion { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("worstCaseConcentration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? WorstCaseConcentration { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("coverThickness", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? CoverThickness { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("dataQuality", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public DataQuality? DataQuality { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("concentrationDownstream", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? ConcentrationDownstream { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Removed { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removalReason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public RemovalReason? RemovalReason { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Factor { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? Flag { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public PolygonType? PolygonType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("polygonArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? PolygonArea { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningStandardParameters StandardParameters { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundOrigin? CompoundOrigin { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SourceSize { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundTranslationType? CompoundTranslationType { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ScreeningLocationDetailView 
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CreatedAt { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public LocationInfo Location { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("v1PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningPolygonResult V1PolygonResult { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("v2PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningPolygonResult V2PolygonResult { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("hasV1Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? HasV1Polygon { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("hasV2Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? HasV2Polygon { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("v1Screenings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ScreeningLocationResultItem> V1Screenings { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("v2Screenings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ScreeningLocationResultItem> V2Screenings { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("screeningLog", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningLog ScreeningLog { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("totalFlags", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? TotalFlags { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ScreeningResultDetailView 
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("screeningId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ScreeningId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CreatedAt { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningStatus? Status { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public LocationInfo Location { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("industry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Industry Industry { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("activity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Activity Activity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundCasNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string CompoundCasNr { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("qualityCriterion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? QualityCriterion { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("worstCaseConcentration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? WorstCaseConcentration { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("coverThickness", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? CoverThickness { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("dataQuality", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public DataQuality? DataQuality { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("concentrationDownstream", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? ConcentrationDownstream { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Removed { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("removalReason", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public RemovalReason? RemovalReason { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("logInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<ScreeningLogInfo> LogInfo { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("concTopTables", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? ConcTopTables { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("conc100mGrundRisk", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Conc100mGrundRisk { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("factor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Factor { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("flag", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? Flag { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("polygonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public PolygonType? PolygonType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("polygonArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? PolygonArea { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("standardParameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningStandardParameters StandardParameters { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundOrigin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundOrigin? CompoundOrigin { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("sourceSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? SourceSize { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("compoundTranslationType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CompoundTranslationType? CompoundTranslationType { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class ScreeningHistoryItem 
+    {
+        [Newtonsoft.Json.JsonProperty("locationId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? LocationId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("screeningId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ScreeningId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset? CreatedAt { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("v1PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningPolygonResult V1PolygonResult { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("v2PolygonResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningPolygonResult V2PolygonResult { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("hasV1Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? HasV1Polygon { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("hasV2Polygon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? HasV2Polygon { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("missingActivities", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<MissingActivity> MissingActivities { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("missingPollutionCauses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<MissingPollutionCause> MissingPollutionCauses { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("missingPollutantComponents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<MissingPollutantComponent> MissingPollutantComponents { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("screeningLog", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningLog ScreeningLog { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("totalFlags", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ScreeningFlag? TotalFlags { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.23.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class EmbeddedReportTokenModel 
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("embedUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EmbedUrl { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("token", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Token { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("tokenId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? TokenId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("expiration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset? Expiration { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("minutesToExpiration", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? MinutesToExpiration { get; set; }
-
-
+    
+    
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.6.2.0 (NJsonSchema v10.1.23.0 (Newtonsoft.Json v12.0.0.0))")]
@@ -4224,7 +4873,7 @@ namespace Dmp.Examples.GrundriskIntegration
             : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + ((response == null) ? "(null)" : response.Substring(0, response.Length >= 512 ? 512 : response.Length)), innerException)
         {
             StatusCode = statusCode;
-            Response = response;
+            Response = response; 
             Headers = headers;
         }
 
@@ -4250,6 +4899,6 @@ namespace Dmp.Examples.GrundriskIntegration
 
 #pragma warning restore 1591
 #pragma warning restore 1573
-#pragma warning restore 472
-#pragma warning restore 114
-#pragma warning restore 108
+#pragma warning restore  472
+#pragma warning restore  114
+#pragma warning restore  108

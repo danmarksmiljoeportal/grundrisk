@@ -94,7 +94,7 @@ namespace Dmp.Examples.GrundriskIntegration
             path = path ?? String.Empty;
             if (path.StartsWith("/")) path = path.Substring(1);
 
-            _url = $"http://127.0.0.1:{port}/{path}";
+            _url = $"https://127.0.0.1:{port}/{path}";
 
             _host = new WebHostBuilder()
                 .UseKestrel()
