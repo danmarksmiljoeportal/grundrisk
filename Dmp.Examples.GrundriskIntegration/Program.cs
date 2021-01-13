@@ -28,6 +28,9 @@ namespace Dmp.Examples.GrundriskIntegration
             var grundriskClient = new GrundriskClient(grundriskEndpoint, httpClient);
 
             await Preliminaryscreening.StartPreliminarySceening(grundriskClient, webUrl);
+            await JarEndpoints.GetJarScreeningDetailsAsync(grundriskClient, "253-00585");
+            Console.WriteLine("---");
+            await JarEndpoints.GetJarRiskCalculationDetailsAsync(grundriskClient, "253-00585");
         }
 
         private static OidcClient InitializeLoginClient()
