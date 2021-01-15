@@ -46,7 +46,7 @@ The code consist of a SPA using Angular which shows how to fetch data and a .net
 
 In order to communicate with the endpoint `/screenings/preliminary` the code has to use the OAUTH codeflow against the endpoint. That means you have to contact DMP for registration on the DMP useradm for both test and production.
 
-You will need the role miljoe_grundrisk_foreloebigscreening in order to acces the endpoint. 
+You will need the role miljoe_grundrisk_foreloebigscreening in order to acces the endpoint.
 
 Please contact Danmarks Mlijøportal's support at support@miljoeportal.dk to get a client id and client secret for authorization.
 
@@ -108,7 +108,7 @@ When you receive a response from the preliminary screenings for each compound th
 
 In our example where the value is decimal 9 and 1001 as binary, can we now derive the following:
  1. Bly_Kobber_eller_PAH is lit on as this is the first 1 in the 1001
- 2. Svag_geologi is also lit as we have 1 in the end 1001. 
+ 2. Svag_geologi is also lit as we have 1 in the end 1001.
 
 
 Next is to put at more wording on the flag enum - here do we use this:
@@ -121,7 +121,7 @@ Next is to put at more wording on the flag enum - here do we use this:
 - Manglende_modelstof
   - Et eller flere forureningsstoffer mangler et modelstof
 - Svag_geologi
-  - Svag datadækning for bestemmelse af dæklagstykkelser 
+  - Svag datadækning for bestemmelse af dæklagstykkelser
 - MTBE_fjernet
   - MTBE fjernet
 - Boring_uden_ler
@@ -141,7 +141,7 @@ The values have this description:
 \- headGradient
 * Hydraulisk gradient
 
-\- aquiferDepth 
+\- aquiferDepth
 * Dybde til grundvandsmagasin
 
 \- horizontalHydraulicConductivity
@@ -167,7 +167,7 @@ The response will show the links:
 
 # 7. Landfills
 The preliminary screening will now scan the input for the following activities or pollutioncause in order to determine if the input constitutes a landfill location.
-1. Activitites is located here: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/activities  
+1. Activitites is located here: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/activities
 
 and has currently the codes
 ```
@@ -181,9 +181,9 @@ and has currently the codes
 ```
 3. If it does match one of the code it will constitute landfill it will get the following compounds added which then will be screened along with the other input.
 
-The compounds that are added are obtained from: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/pollutants 
+The compounds that are added are obtained from: https://dkjord-api.demo.miljoeportal.dk/api/locations/landfills/pollutants
 
-and has currently the values 
+and has currently the values
 
 | PollutantCode | PollutantName   | PollutantCompoundGroup      | Concentration | ModelCompoundCode | ModelCompoundName |
 |---------------|-----------------|-----------------------------|---------------|-------------------|-------------------|
@@ -225,7 +225,7 @@ To translate this into the removal reasons shown on the grundrisk web use this:
         [Description(Fjernet grundet stofgruppe PAH/Bly/Kobber']]
         Removed_1_2 = 12,
         [Description("'Forureningsfladen er 0')]
-        Removed_1_3 = 13,  
+        Removed_1_3 = 13,
         [Description("'Grundet dæklagets tykkelse forventes det ikke, at forureningsstoffet når grundvandet'],]
         Removed_2_1 = 21,
         [Description('Fjernet grundet bestemte stoffer']
@@ -237,7 +237,7 @@ To translate this into the removal reasons shown on the grundrisk web use this:
         // Step 3
         [Description('GVK er større end koncentration efter horisontalt transport)]
         Removed_3_1 = 31
-		
+
 
 # 9. CompoundTranslationType enum:
 CompoundTranslationType is a enum with these values: Activity, PollutionCause, Pollutant
@@ -254,7 +254,7 @@ If the result is V1 and from PollutionCause, CompoundTranslationType is Pollutio
 If the result is V2, CompoundTranslationType is Pollutant
 
 
-# 10. Test input  for preliminary screening 
+# 10. Test input  for preliminary screening
 
 It produces produces 2 flags  - value 8 and 9 and standard parameters
 
@@ -301,7 +301,7 @@ Response (part of the response)
 ```json
 "standardParameters": {       "infiltration": 100,       "aquiferDepth": 14.34807491,       "headGradient": 0.007,       "lithoCode": 1,       "distNearestWaterWell": 675.1535179323225,       "distNoClay": 669.5346970240031,       "porosity": 0,       "horizontalHydraulicConductivity": 0,       "firstOrderDegradationRate": 0     },
 ```
-For each compound do you get this result: 
+For each compound do you get this result:
 ```json
 {
   "id": "b2d971a3-7e50-4cd2-8433-ac870031ab66",
@@ -417,3 +417,552 @@ For each compound do you get this result:
   "locationNumber": "000-00003"
 }
  ```
+
+# 11. Overruling screening
+Overruling screening rules are applied to determine whether or not screening data will be saved or discard by applying several rules.
+There are 10 rules to be applied.
+- Comparison rule 1: Save screening if exceedingfactor changes from <1 to >1
+- Comparison rule 2: Save screening if exceedingfactor changes from >1 to <1
+- Comparison rule 3: Save screening if exceeding factor changes more than 5%(configurable)
+- Comparison rule 4: Save screening if any changes in screening flags
+- Comparison rule 5: Save screening if there is changes in pollutants
+- Comparison rule 6: Save screening if there is changes in pollutioncauses
+- Comparison rule 7: Save screening if there is changes in activities
+- Comparison rule 8: Save screening if sum of V1 polygon areas exceeds 5% (configurable)
+- Comparison rule 9: Save screening if sum of V2 polygon areas exceeds 5% (configurable)
+- Comparison rule 10: Save screening if there is changes in missing activities/pollutioncause/pollutants
+
+### OverrulingScreeningType enum
+OverrulingScreeningType enum describes which overruling screening rules are applied
+```
+        None = 0,
+        ExceedingFactorChangedToLargerOrEqualOneRule = 10,
+        ExceedingFactorChangedToSmallerThanOneRule = 20,
+        ExceedingFactorExceedLimitationRule = 30,
+        FlagsChangedRule = 40,
+        PollutantsChangedRule = 50,
+        PollutionCausesChangedRule = 60,
+        ActivitiesChangedRule = 70,
+        SumV1PolygonAreaExceedLimitationRule = 80,
+        SumV2PolygonAreaExceedLimitationRule = 90,
+        MissingModelCompoundsChangedRule = 100
+```
+
+# 12. Screening log
+One of the output after doing a screening is the screening log.
+Then this screening log data will be used in many places like the Jar endpoints and load screening details
+* Schema:
+ ```json
+"screeningLog": {
+    "screeningCause": 0,
+    "newScreeningAt": "2021-01-15T04:34:05.440Z",
+    "previousScreeningAt": "2021-01-15T04:34:05.440Z",
+    "reasonToSave": 0,
+    "overrulingScreeningRulesApplied": [
+      0
+    ],
+    "addedFlags": 0,
+    "removedFlags": 0,
+    "addedPollutants": [
+      "string"
+    ],
+    "removedPollutants": [
+      "string"
+    ],
+    "addedPollutionCauses": [
+      {
+        "compoundName": "string",
+        "industry": {
+          "name": "string",
+          "codeValue": "string"
+        }
+      }
+    ],
+    "removedPollutionCauses": [
+      {
+        "compoundName": "string",
+        "industry": {
+          "name": "string",
+          "codeValue": "string"
+        }
+      }
+    ],
+    "addedActivities": [
+      {
+        "compoundName": "string",
+        "activity": {
+          "name": "string",
+          "codeValue": "string",
+          "translatedCompound": "string",
+          "type": 0
+        }
+      }
+    ],
+    "removedActivities": [
+      {
+        "compoundName": "string",
+        "activity": {
+          "name": "string",
+          "codeValue": "string",
+          "translatedCompound": "string",
+          "type": 0
+        }
+      }
+    ],
+    "addedMissingActivities": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string",
+        "type": 1
+      }
+    ],
+    "removedMissingActivities": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string",
+        "type": 1
+      }
+    ],
+    "addedMissingPollutionCauses": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string",
+        "type": 1
+      }
+    ],
+    "removedMissingPollutionCauses": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string",
+        "type": 1
+      }
+    ],
+    "addedMissingPollutantComponents": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string"
+      }
+    ],
+    "removedMissingPollutantComponents": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string"
+      }
+    ],
+    "addedV1PolygonAreaInTotal": 0,
+    "removedV1PolygonAreaInTotal": 0,
+    "addedV2PolygonAreaInTotal": 0,
+    "removedV2PolygonAreaInTotal": 0,
+    "addedExceedFactor": 0,
+    "removedExceedFactor": 0,
+    "reassessedToStatus": 0,
+    "reassessmentComment": "string",
+    "screeningTriggeredBy": 0
+  }
+```
+### ReasonToSaveScreening enum
+```
+        None = 0,
+        FirstTimeSaved = 1,
+        AppliedOverrulingScreening = 10
+```
+### ScreeningCause enum
+```
+        None = 0,
+        DKjord = 1,
+        RiskCalculation = 2
+```
+### ScreeningTriggeredBy enum
+```
+        None = 0,
+        Dkjord = 1,
+        GrundRisk = 2
+```
+
+# 13. Jar endpoints
+There is a need to provide latest screening data together with screening log and risk calculations data to Jar consuming those data, thus some endpoints are created to adapt this need. Also, Jar's events are created to do notification jobs to Jar system side once there is a new screening or a new risk calculation being started or updated.
+
+- Endpoint to fetch latest screening, screening results data together with screening log:
+  - /jar/locations/{locationNumber}/screenings
+* Response body:
+``` json
+{
+  "locationNumber": "string",
+  "totalFlags": 0,
+  "v1ScreeningResults": [
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "createdAt": "2021-01-08T04:29:02.795Z",
+      "status": 0,
+      "industry": {
+        "name": "string",
+        "codeValue": "string"
+      },
+      "activity": {
+        "name": "string",
+        "codeValue": "string",
+        "translatedCompound": "string",
+        "type": 0
+      },
+      "compoundName": "string",
+      "compoundCasNr": "string",
+      "qualityCriterion": 0,
+      "worstCaseConcentration": 0,
+      "coverThickness": 0,
+      "dataQuality": 0,
+      "concentrationDownstream": 0,
+      "removed": true,
+      "removalReason": 0,
+      "factor": 0,
+      "flag": 0,
+      "polygonType": 0,
+      "polygonArea": 0,
+      "standardParameters": {
+        "infiltration": 0,
+        "aquiferDepth": 0,
+        "headGradient": 0,
+        "lithoCode": 0,
+        "distNearestWaterWell": 0,
+        "distNoClay": 0,
+        "porosity": 0,
+        "horizontalHydraulicConductivity": 0,
+        "firstOrderDegradationRate": 0
+      },
+      "compoundOrigin": 0,
+      "sourceSize": 0,
+      "compoundTranslationType": 0
+    }
+  ],
+  "v2ScreeningResults": [
+    {
+      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "createdAt": "2021-01-08T04:29:02.795Z",
+      "status": 0,
+      "industry": {
+        "name": "string",
+        "codeValue": "string"
+      },
+      "activity": {
+        "name": "string",
+        "codeValue": "string",
+        "translatedCompound": "string",
+        "type": 0
+      },
+      "compoundName": "string",
+      "compoundCasNr": "string",
+      "qualityCriterion": 0,
+      "worstCaseConcentration": 0,
+      "coverThickness": 0,
+      "dataQuality": 0,
+      "concentrationDownstream": 0,
+      "removed": true,
+      "removalReason": 0,
+      "factor": 0,
+      "flag": 0,
+      "polygonType": 0,
+      "polygonArea": 0,
+      "standardParameters": {
+        "infiltration": 0,
+        "aquiferDepth": 0,
+        "headGradient": 0,
+        "lithoCode": 0,
+        "distNearestWaterWell": 0,
+        "distNoClay": 0,
+        "porosity": 0,
+        "horizontalHydraulicConductivity": 0,
+        "firstOrderDegradationRate": 0
+      },
+      "compoundOrigin": 0,
+      "sourceSize": 0,
+      "compoundTranslationType": 0
+    }
+  ],
+  "screeningLog": {
+    "screeningCause": 0,
+    "newScreeningAt": "2021-01-08T04:29:02.795Z",
+    "previousScreeningAt": "2021-01-08T04:29:02.795Z",
+    "reasonToSave": 0,
+    "overrulingScreeningRulesApplied": [
+      0
+    ],
+    "addedFlags": 0,
+    "removedFlags": 0,
+    "addedPollutants": [
+      "string"
+    ],
+    "removedPollutants": [
+      "string"
+    ],
+    "addedPollutionCauses": [
+      {
+        "compoundName": "string",
+        "industry": {
+          "name": "string",
+          "codeValue": "string"
+        }
+      }
+    ],
+    "removedPollutionCauses": [
+      {
+        "compoundName": "string",
+        "industry": {
+          "name": "string",
+          "codeValue": "string"
+        }
+      }
+    ],
+    "addedActivities": [
+      {
+        "compoundName": "string",
+        "activity": {
+          "name": "string",
+          "codeValue": "string",
+          "translatedCompound": "string",
+          "type": 0
+        }
+      }
+    ],
+    "removedActivities": [
+      {
+        "compoundName": "string",
+        "activity": {
+          "name": "string",
+          "codeValue": "string",
+          "translatedCompound": "string",
+          "type": 0
+        }
+      }
+    ],
+    "addedMissingActivities": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string",
+        "type": 1
+      }
+    ],
+    "removedMissingActivities": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string",
+        "type": 1
+      }
+    ],
+    "addedMissingPollutionCauses": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string",
+        "type": 1
+      }
+    ],
+    "removedMissingPollutionCauses": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string",
+        "type": 1
+      }
+    ],
+    "addedMissingPollutantComponents": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string"
+      }
+    ],
+    "removedMissingPollutantComponents": [
+      {
+        "code": "string",
+        "description": "string",
+        "translatedCompound": "string"
+      }
+    ],
+    "addedV1PolygonAreaInTotal": 0,
+    "removedV1PolygonAreaInTotal": 0,
+    "addedV2PolygonAreaInTotal": 0,
+    "removedV2PolygonAreaInTotal": 0,
+    "addedExceedFactor": 0,
+    "removedExceedFactor": 0,
+    "reassessedToStatus": 0,
+    "reassessmentComment": "string",
+    "screeningTriggeredBy": 0
+  }
+}
+```
+- Endpoint to fetching location, risk calculations data:
+  - /jar/locations/{locationNumber}/riskCalculations
+* Response body:
+``` json
+{
+  "locationNumber": "string",
+  "locationStatus": "string",
+  "approvedCalculations": [
+    {
+      "createdAt": "2021-01-08T04:30:52.567Z",
+      "compoundName": "string",
+      "compoundCasNr": "string",
+      "exceedingFactor": 0,
+      "calculationModelType": 0,
+      "calculationFailed": true,
+      "calculationFailedErrorMessage": "string"
+    }
+  ],
+  "unapprovedCalculations": [
+    {
+      "createdAt": "2021-01-08T04:30:52.567Z",
+      "compoundName": "string",
+      "compoundCasNr": "string",
+      "exceedingFactor": 0,
+      "calculationModelType": 0,
+      "calculationFailed": true,
+      "calculationFailedErrorMessage": "string"
+    }
+  ]
+}
+```
+
+# 14. Notification events sent to Jar
+There are 3 events to be sent to Jar as following listed:
+- JarScreeningNewEvent : when there is a new screening has been saved, system notifies Jar with this event.
+  - Schema:
+```json
+{
+   "id":"3e8ceb09-186c-452a-ac61-acb00039309f",
+   "subject":"Jar.Screening.New",
+   "data":{
+      "ScreeningCause":1,
+      "NewScreeningAt":"2021-01-14T03:28:14.1558744+00:00",
+      "PreviousScreeningAt":"2021-01-13T23:31:38.3342789+00:00",
+      "ReasonToSave":1,
+      "ScreeningLog":{
+         "ScreeningCause":1,
+         "NewScreeningAt":"2021-01-14T03:28:14.1558744+00:00",
+         "PreviousScreeningAt":"2021-01-13T23:31:38.3342789+00:00",
+         "ReasonToSave":1,
+         "OverrulingScreeningRulesApplied":[
+
+         ],
+         "AddedFlags":0,
+         "RemovedFlags":0,
+         "AddedPollutants":[
+
+         ],
+         "RemovedPollutants":[
+
+         ],
+         "AddedPollutionCauses":[
+
+         ],
+         "RemovedPollutionCauses":[
+
+         ],
+         "AddedActivities":[
+
+         ],
+         "RemovedActivities":[
+
+         ],
+         "AddedMissingActivities":[
+
+         ],
+         "RemovedMissingActivities":[
+
+         ],
+         "AddedMissingPollutionCauses":[
+
+         ],
+         "RemovedMissingPollutionCauses":[
+
+         ],
+         "AddedMissingPollutantComponents":[
+
+         ],
+         "RemovedMissingPollutantComponents":[
+
+         ],
+         "AddedV1PolygonAreaInTotal":0.0,
+         "RemovedV1PolygonAreaInTotal":0.0,
+         "AddedV2PolygonAreaInTotal":0.0,
+         "RemovedV2PolygonAreaInTotal":0.0,
+         "AddedExceedFactor":0.0,
+         "RemovedExceedFactor":0.0,
+         "ScreeningTriggeredBy":2
+      },
+      "ReassessedToStatus":0,
+      "ReassementDate":"0001-01-01T00:00:00+00:00",
+      "CreatedAt":"2021-01-14T03:28:14.1558744+00:00",
+      "LocationId":"81fafe52-4742-4316-b2ca-dc3bbd3445fc",
+      "LocationNumber":"230-05005",
+      "Region":1084,
+      "Id":"3e8ceb09-186c-452a-ac61-acb00039309f"
+   },
+   "eventType":"Jar.Screening.New",
+   "eventTime":"2021-01-14T03:28:14.8873174Z",
+   "metadataVersion":"1",
+   "dataVersion":"1.0"
+}
+```
+- JarRiskCalculationUnapprovedEvent: when a location start a new risk assessment process, system notifies Jar with this event.
+  - Schema:
+```json
+{
+   "id":"4d160bb9-99d4-4219-a0df-acb000ff80fe",
+   "topic":null,
+   "subject":"Jar.RiskCalculation.Unapproved",
+   "data":{
+      "Type":"Jar.RiskCalculation.Unapproved",
+      "ContaminantCasNr":"120365",
+      "ContaminantName":"Dichlorprop",
+      "ModelType":1,
+      "ExcessFactor":null,
+      "CreatedAt":"2021-01-14T15:30:28.6231824+00:00",
+      "LocationId":"f74f8f25-832b-42b0-81e3-000c834287fa",
+      "LocationNumber":"233-00322",
+      "Region":1084,
+      "Id":"4d160bb9-99d4-4219-a0df-acb000ff80fe"
+   },
+   "eventType":"Jar.RiskCalculation.Unapproved",
+   "eventTime":"2021-01-14T22:30:38.5944416+07:00",
+   "metadataVersion":null,
+   "dataVersion":"1.0"
+}
+```
+- JarRiskCalculationApprovedEvent: when a risk assessment details is approved, system notifies Jar with this event.
+  - Schema:
+```json
+{
+   "id":"4d160bb9-99d4-4219-a0df-acb000ff80fe",
+   "topic":null,
+   "subject":"Jar.RiskCalculation.Approved",
+   "data":{
+      "Type":"Jar.RiskCalculation.Approved",
+      "ContaminantCasNr":"120365",
+      "ContaminantName":"Dichlorprop",
+      "ModelType":1,
+      "ExcessFactor":null,
+      "CreatedAt":"2021-01-14T15:30:28.6231824+00:00",
+      "LocationId":"f74f8f25-832b-42b0-81e3-000c834287fa",
+      "LocationNumber":"233-00322",
+      "Region":1084,
+      "Id":"4d160bb9-99d4-4219-a0df-acb000ff80fe"
+   },
+   "eventType":"Jar.RiskCalculation.Approved",
+   "eventTime":"2021-01-14T22:33:02.5312347+07:00",
+   "metadataVersion":null,
+   "dataVersion":"1.0"
+}
+```
+All 3 events are sent to an appropriate region in one of 5 regions:
+* RegionH
+* RegionSj
+* RegionSyd
+* RegionMidt
+* RegionNord
