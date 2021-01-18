@@ -436,7 +436,6 @@ Then this screening log data will be used in many places like the Jar endpoints 
 * Schema:
  ```json
 "screeningLog": {
-    "screeningCause": 0,
     "newScreeningAt": "2021-01-15T04:34:05.440Z",
     "previousScreeningAt": "2021-01-15T04:34:05.440Z",
     "reasonToSave": 0,
@@ -652,7 +651,6 @@ There is a need to provide latest screening data together with screening log and
     }
   ],
   "screeningLog": {
-    "screeningCause": 0,
     "newScreeningAt": "2021-01-08T04:29:02.795Z",
     "previousScreeningAt": "2021-01-08T04:29:02.795Z",
     "reasonToSave": 0,
@@ -806,12 +804,10 @@ There are 3 events to be sent to Jar as following listed:
    "id":"3e8ceb09-186c-452a-ac61-acb00039309f",
    "subject":"Jar.Screening.New",
    "data":{
-      "ScreeningCause":1,
       "NewScreeningAt":"2021-01-14T03:28:14.1558744+00:00",
       "PreviousScreeningAt":"2021-01-13T23:31:38.3342789+00:00",
       "ReasonToSave":1,
       "ScreeningLog":{
-         "ScreeningCause":1,
          "NewScreeningAt":"2021-01-14T03:28:14.1558744+00:00",
          "PreviousScreeningAt":"2021-01-13T23:31:38.3342789+00:00",
          "ReasonToSave":1,
@@ -862,7 +858,7 @@ There are 3 events to be sent to Jar as following listed:
          "RemovedV2PolygonAreaInTotal":0.0,
          "AddedExceedFactor":0.0,
          "RemovedExceedFactor":0.0,
-         "ScreeningTriggeredBy":2
+         "ScreeningTriggeredBy":1
       },
       "ReassessedToStatus":0,
       "ReassementDate":"0001-01-01T00:00:00+00:00",
