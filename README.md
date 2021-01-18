@@ -200,11 +200,7 @@ and has currently the values
 
 4. CompoundOrigin enum:
 
-```
-    Dkjord = 0,
-    JAR = 1,
-    Landfill = 2
-```
+[Definition of CompoundOrigin enum](./Wiki/Domains/Enums/CompoundOrigin.md)
 
 * If IsLandfill of preliminary screening in the response is true, the list of preliminary screening contains 10 results that have CompoundOrigin is Landfill
 
@@ -432,21 +428,7 @@ There are 10 rules to be applied.
 - Comparison rule 9: Save screening if sum of V2 polygon areas exceeds 5% (configurable)
 - Comparison rule 10: Save screening if there is changes in missing activities/pollutioncause/pollutants
 
-### OverrulingScreeningType enum
-OverrulingScreeningType enum describes which overruling screening rules are applied
-```
-        None = 0,
-        ExceedingFactorChangedToLargerOrEqualOneRule = 10,
-        ExceedingFactorChangedToSmallerThanOneRule = 20,
-        ExceedingFactorExceedLimitationRule = 30,
-        FlagsChangedRule = 40,
-        PollutantsChangedRule = 50,
-        PollutionCausesChangedRule = 60,
-        ActivitiesChangedRule = 70,
-        SumV1PolygonAreaExceedLimitationRule = 80,
-        SumV2PolygonAreaExceedLimitationRule = 90,
-        MissingModelCompoundsChangedRule = 100
-```
+[Definition of OverrulingScreeningType enum](./Wiki/Domains/Enums/OverrulingScreeningType.md)
 
 # 12. Screening log
 One of the output after doing a screening is the screening log.
@@ -566,24 +548,10 @@ Then this screening log data will be used in many places like the Jar endpoints 
     "screeningTriggeredBy": 0
   }
 ```
-### ReasonToSaveScreening enum
-```
-        None = 0,
-        FirstTimeSaved = 1,
-        AppliedOverrulingScreening = 10
-```
-### ScreeningCause enum
-```
-        None = 0,
-        DKjord = 1,
-        RiskCalculation = 2
-```
-### ScreeningTriggeredBy enum
-```
-        None = 0,
-        Dkjord = 1,
-        GrundRisk = 2
-```
+
+[Definition of ReasonToSaveScreening enum](./Wiki/Domains/Enums/ReasonToSaveScreening.md)
+
+[Definition of ScreeningTriggeredBy enum](./Wiki/Domains/Enums/ScreeningTriggeredBy.md)
 
 # 13. Jar endpoints
 There is a need to provide latest screening data together with screening log and risk calculations data to Jar consuming those data, thus some endpoints are created to adapt this need. Also, Jar's events are created to do notification jobs to Jar system side once there is a new screening or a new risk calculation being started or updated.
