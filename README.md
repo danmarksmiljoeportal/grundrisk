@@ -796,7 +796,18 @@ There is a need to provide latest screening data together with screening log and
 ```
 
 # 14. Notification events sent to Jar
+There is created 5 storageaccounts which have the queue called messages - one for 5 regions:
+
+* RegionH - grskprodjar1084sto
+* RegionSj - grskprodjar1085sto
+* RegionSyd - grskprodjar1083stp
+* RegionMidt - grskprodjar1082sto
+* RegionNord - grskprodjar1081sto
+
+
+
 There are 3 events to be sent to Jar as following listed:
+
 - JarScreeningNewEvent : when there is a new screening has been saved, system notifies Jar with this event.
   - Schema:
 ```json
