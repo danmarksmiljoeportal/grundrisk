@@ -796,7 +796,9 @@ There is a need to provide latest screening data together with screening log and
 ```
 
 # 14. Notification events sent to Jar
-There is created 5 storageaccounts which have the queue called messages - one for 5 regions:
+There is created 5 storageaccounts which have the queue called "messages".
+
+The storage accounts and their regions:
 
 * RegionH - grskprodjar1084sto
 * RegionSj - grskprodjar1085sto
@@ -935,9 +937,4 @@ There are 3 events to be sent to Jar as following listed:
    "dataVersion":"1.0"
 }
 ```
-All 3 events are sent to an appropriate region in one of 5 regions:
-* RegionH
-* RegionSj
-* RegionSyd
-* RegionMidt
-* RegionNord
+
