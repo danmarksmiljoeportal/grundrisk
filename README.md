@@ -1,3 +1,3 @@
 Welcome to GrundRisk!
 
-Please refer our documents at [here](./wiki)
+ Get started at our documents [here](https://github.com/danmarksmiljoeportal/grundrisk/wiki)
